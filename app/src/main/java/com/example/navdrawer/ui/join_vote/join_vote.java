@@ -14,17 +14,17 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.navdrawer.R;
 
-public class SlideshowFragment extends Fragment {
+public class join_vote extends Fragment {
 
-    private SlideshowViewModel slideshowViewModel;
+    private JoinVoteModel joinVoteModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        slideshowViewModel =
-                ViewModelProviders.of(this).get(SlideshowViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_slideshow, container, false);
+        joinVoteModel =
+                ViewModelProviders.of(this).get(JoinVoteModel.class);
+        View root = inflater.inflate(R.layout.join_vote, container, false);
         final TextView textView = root.findViewById(R.id.text_slideshow);
-        slideshowViewModel.getText().observe(this, new Observer<String>() {
+        joinVoteModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);

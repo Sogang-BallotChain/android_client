@@ -19,18 +19,54 @@ import java.net.URL;
 
 
 public class httpConnection {
-    String urlString = "http://www.naver.com/";
 
-
+    //String urlString = "https://news.naver.com/main/list.nhn?mode=LPOD&mid=sec&sid1=001&sid2=140&oid=001&isYeonhapFlash=Y&aid=0011171408";
+    String urlString = "http://www.ballotchain.net/testapi/20141508";
+    private final String USER_AGENT = "Mozilla/5.0";
+    //생성자
     httpConnection() {
         ;
     }
 
+    //just connect to remote server.
     public Boolean ConnectRemoteServer() {
         try {
             URL url = new URL(urlString);
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 
+            //각종세팅.
+            urlConnection.setRequestProperty("Content-Type", "application/json");
+            urlConnection.setRequestProperty("User-Agent","Mozilla/4.0");
+            //urlConnection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11");
+            urlConnection.setRequestMethod("GET");
+            urlConnection.setDoOutput(true);
+            urlConnection.setDoInput(true);
+
+            urlConnection.connect();
+
+
+            // 요청 방식 구하기
+            System.out.println("getRequestMethod():" + urlConnection.getRequestMethod());
+            // 응답 콘텐츠 유형 구하기
+            System.out.println("getContentType():" + urlConnection.getContentType());
+            // 응답 코드 구하기
+            System.out.println("getResponseCode():"    + urlConnection.getResponseCode());
+            // 응답 메시지 구하기
+            System.out.println("getResponseMessage():" + urlConnection.getResponseMessage());
+            //콘텐트 요청
+            System.out.println("getContent():" + urlConnection.getContent());
+
+/*
+            InputStream is = urlConnection.getInputStream();
+            StringBuilder sb = new StringBuilder();
+            BufferedReader br = new BufferedReader(new InputStreamReader(is,"UTF-8"));
+            String result;
+            while((result = br.readLine())!= null){
+                sb.append(result + "\n");
+            }
+            result = sb.toString();
+            System.out.println("we got"+result);
+*/
             return true;
         } catch (MalformedURLException e) {
             System.out.println("malformed url exception\n");
@@ -41,7 +77,9 @@ public class httpConnection {
             e.printStackTrace();
             return false;
         }
-
     }
+
+    //
+
 
 }

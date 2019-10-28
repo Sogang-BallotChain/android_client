@@ -37,15 +37,15 @@
         android:id="@+id/email_uploads"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="328dp"
+        android:layout_marginTop="340dp"
         android:text="후보자 이메일 목록 등록하기"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.457"
+        app:layout_constraintHorizontal_bias="0.569"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/month"
+        android:id="@+id/st_month"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="21dp"
@@ -53,31 +53,70 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:text="달력"
-        app:layout_constraintBaseline_toBaselineOf="@+id/time"
-        app:layout_constraintEnd_toStartOf="@+id/time"
+        app:layout_constraintBaseline_toBaselineOf="@+id/st_time"
+        app:layout_constraintEnd_toStartOf="@+id/st_time"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/time"
+        android:id="@+id/st_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="106dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:text="시간"
-        app:layout_constraintEnd_toStartOf="@+id/set_due"
-        app:layout_constraintStart_toEndOf="@+id/month"
+        app:layout_constraintEnd_toStartOf="@+id/st_set_due"
+        app:layout_constraintStart_toEndOf="@+id/st_month"
         app:layout_constraintTop_toBottomOf="@+id/email_uploads" />
 
     <Button
-        android:id="@+id/set_due"
+        android:id="@+id/st_set_due"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="달력/시간 확인"
-        app:layout_constraintBaseline_toBaselineOf="@+id/time"
+        app:layout_constraintBaseline_toBaselineOf="@+id/st_time"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/time" />
+        app:layout_constraintStart_toEndOf="@+id/st_time" />
+
+
+    <Button
+        android:id="@+id/dt_month"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="21dp"
+        android:layout_marginLeft="21dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="달력"
+        app:layout_constraintEnd_toStartOf="@+id/dt_time"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/st_month" />
+
+    <Button
+        android:id="@+id/dt_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="시간"
+        app:layout_constraintEnd_toStartOf="@+id/dt_set_due"
+        app:layout_constraintStart_toEndOf="@+id/dt_month"
+        app:layout_constraintTop_toBottomOf="@+id/st_month" />
+
+    <Button
+        android:id="@+id/dt_set_due"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="달력/시간 확인"
+        app:layout_constraintBaseline_toBaselineOf="@+id/dt_time"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/dt_time" />
+
+
 
     <Button
         android:id="@+id/CreateVoteButton"

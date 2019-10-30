@@ -10,23 +10,30 @@ import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
+import java.util.Map;
+import java.io.ByteArrayOutputStream;
+
+
 
 
 public class httpConnection {
 
-    //String urlString = "https://news.naver.com/main/list.nhn?mode=LPOD&mid=sec&sid1=001&sid2=140&oid=001&isYeonhapFlash=Y&aid=0011171408";
-    String urlString = "http://www.ballotchain.net/testapi/20141508";
+    String urlString = "http://www.ballotchain.net/user/signup";
+    //String urlString = "http://www.ballotchain.net/testapi/20141508";
     private final String USER_AGENT = "Mozilla/5.0";
     //생성자
     httpConnection() {
         ;
     }
+
 
     //just connect to remote server.
     public Boolean ConnectRemoteServer() {
@@ -34,16 +41,36 @@ public class httpConnection {
             URL url = new URL(urlString);
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 
+            //post 세팅
+            String data = "{" + "\"email\":\"pineleaf1215@gmail.com\"," +"\"password\":\"1234\""
+                    +"}";
+
+
+
+
             //각종세팅.
             urlConnection.setRequestProperty("Content-Type", "application/json");
             urlConnection.setRequestProperty("User-Agent","Mozilla/4.0");
-            //urlConnection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11");
-            urlConnection.setRequestMethod("GET");
+            urlConnection.setRequestMethod("POST");
+            //urlConnection.connect();
+
+
+            //post 방식
             urlConnection.setDoOutput(true);
-            urlConnection.setDoInput(true);
+            DataOutputStream wr = new DataOutputStream(urlConnection.getOutputStream());
+            wr.writeBytes(data);
+            wr.flush();
+            wr.close();
+            /*
+            BufferedReader in = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+            String inputLine;
+            StringBuffer response = new StringBuffer();
 
-            urlConnection.connect();
-
+            while((inputLine = in.readLine()) != null){
+                response.append(inputLine);
+            }
+            in.close();
+            */
 
             // 요청 방식 구하기
             System.out.println("getRequestMethod():" + urlConnection.getRequestMethod());
@@ -54,9 +81,9 @@ public class httpConnection {
             // 응답 메시지 구하기
             System.out.println("getResponseMessage():" + urlConnection.getResponseMessage());
             //콘텐트 요청
-            System.out.println("getContent():" + urlConnection.getContent());
+            //System.out.println("getContent():" + urlConnection.getContent());
 
-/*
+            //파일 읽어 온다. GET
             InputStream is = urlConnection.getInputStream();
             StringBuilder sb = new StringBuilder();
             BufferedReader br = new BufferedReader(new InputStreamReader(is,"UTF-8"));
@@ -66,7 +93,8 @@ public class httpConnection {
             }
             result = sb.toString();
             System.out.println("we got"+result);
-*/
+
+
             return true;
         } catch (MalformedURLException e) {
             System.out.println("malformed url exception\n");

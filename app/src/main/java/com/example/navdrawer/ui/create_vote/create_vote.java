@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.example.navdrawer.HttpConnectionToServer;
 import com.example.navdrawer.R;
 
 //for date,time setting 1014
@@ -20,8 +21,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
 import android.widget.Toast;
-import android.os.AsyncTask;
-//for httpConnection 1014
+//for HttpConnectionToServer 1101
 
 
 public class create_vote extends Fragment {
@@ -96,7 +96,7 @@ public class create_vote extends Fragment {
         });
 
 
-        //for httpConnection 1014
+        //for HttpConnectionToServer 1101
         Button CreateVoteButton = root.findViewById(R.id.CreateVoteButton);
         CreateVoteButton.setOnClickListener(new View.OnClickListener(){
             NetworkTask ConnectCreateVoteModel = new NetworkTask();
@@ -164,7 +164,7 @@ public class create_vote extends Fragment {
     }
 
 
-    //thread for http connection, real http conntection is executed on 'httpConnection' class
+    //thread for http connection, real http conntection is executed on 'HttpConnectionToServer' class
     public class NetworkTask extends AsyncTask<Void,Void,Boolean>{
         private String url;
         private ContentValues values;
@@ -175,8 +175,10 @@ public class create_vote extends Fragment {
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            httpConnection ConnectCreateVoteModel = new httpConnection();
-            if(ConnectCreateVoteModel.ConnectRemoteServer()) {
+            HttpConnectionToServer ConnectCreateVoteModel = new HttpConnectionToServer();
+            String email = "pineleaf1216@gmail.com";
+            String pass = "12345";
+            if(ConnectCreateVoteModel.CreateAccount(email,pass)) {
                 System.out.println("server connected true\n");
                 //Toast.makeText(getActivity(), "connected", Toast.LENGTH_SHORT).show();
                 return true;

@@ -3,76 +3,82 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#30A9DE">
+    android:layout_height="match_parent">
 
 
     <EditText
         android:id="@+id/vote_title"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
-        android:layout_marginEnd="96dp"
-        android:layout_marginRight="96dp"
         android:layout_weight="1"
-        android:background="#EFDC05"
         android:bufferType="spannable"
         android:ems="10"
+        android:gravity="center_horizontal"
         android:text="투표 제목을 입력하세요"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:theme="@style/EditText.Login"
+        android:textStyle="bold"
+        />
 
     <EditText
         android:id="@+id/vote_topic"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="164dp"
-        android:layout_marginEnd="96dp"
-        android:layout_marginRight="96dp"
+        android:layout_marginTop="40dp"
         android:layout_weight="1"
-        android:background="#EFDC05"
         android:ems="10"
         android:text="투표 주제를 입력하세요"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintEnd_toEndOf="@+id/vote_title"
+        app:layout_constraintStart_toStartOf="@+id/vote_title"
+        app:layout_constraintTop_toBottomOf="@+id/vote_title"
+        android:gravity="center_horizontal"
+        android:theme="@style/EditText.Login"
+        android:textStyle="bold"
+        />
 
     <Button
         android:id="@+id/email_uploads"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="340dp"
-        android:background="#EFDC05"
+        android:layout_width="300dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="40dp"
+        android:alpha="0.8"
+        android:background="@color/colorbutton"
         android:text="후보자 이메일 목록 등록하기"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.569"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/vote_title"
+
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/vote_title"
+        app:layout_constraintTop_toBottomOf="@+id/vote_topic" />
+
 
     <Button
         android:id="@+id/st_month"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="21dp"
-        android:layout_marginLeft="21dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:background="#EFDC05"
+        android:alpha="0.8"
+        android:background="@color/colorbutton"
         android:text="달력"
+        android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/st_time"
-        app:layout_constraintEnd_toStartOf="@+id/st_time"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/email_uploads" />
 
     <Button
         android:id="@+id/st_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:background="#EFDC05"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:alpha="0.8"
+        android:background="@color/colorbutton"
         android:text="시간"
+        android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/st_set_due"
         app:layout_constraintStart_toEndOf="@+id/st_month"
         app:layout_constraintTop_toBottomOf="@+id/email_uploads" />
@@ -81,65 +87,65 @@
         android:id="@+id/st_set_due"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#EFDC05"
+        android:alpha="0.8"
+        android:background="@color/colorbutton"
         android:text="달력/시간 확인"
+        android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/st_time"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/st_time" />
-
+        app:layout_constraintEnd_toEndOf="@+id/email_uploads" />
 
     <Button
         android:id="@+id/dt_month"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="21dp"
-        android:layout_marginLeft="21dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:background="#EFDC05"
+        android:alpha="0.8"
+        android:background="@color/colorbutton"
         android:text="달력"
-        app:layout_constraintEnd_toStartOf="@+id/dt_time"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/st_month" />
+        android:textStyle="bold"
+        app:layout_constraintBaseline_toBaselineOf="@+id/dt_time"
+        app:layout_constraintEnd_toEndOf="@+id/st_month"
+        app:layout_constraintStart_toStartOf="@+id/st_month" />
 
     <Button
         android:id="@+id/dt_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:background="#EFDC05"
+        android:layout_marginTop="40dp"
+        android:alpha="0.8"
+        android:background="@color/colorbutton"
         android:text="시간"
-        app:layout_constraintEnd_toStartOf="@+id/dt_set_due"
-        app:layout_constraintStart_toEndOf="@+id/dt_month"
-        app:layout_constraintTop_toBottomOf="@+id/st_month" />
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/st_time"
+        app:layout_constraintHorizontal_bias="0.583"
+        app:layout_constraintStart_toStartOf="@+id/st_time"
+        app:layout_constraintTop_toBottomOf="@+id/st_time" />
+
 
     <Button
         android:id="@+id/dt_set_due"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#EFDC05"
+        android:alpha="0.8"
+        android:background="@color/colorbutton"
         android:text="달력/시간 확인"
+        android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/dt_time"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/dt_time" />
-
+        app:layout_constraintEnd_toEndOf="@+id/st_set_due"
+        app:layout_constraintStart_toStartOf="@+id/st_set_due" />
 
     <Button
         android:id="@+id/CreateVoteButton"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="500dp"
-        android:background="#E53A40"
+        android:layout_marginTop="40dp"
+        android:alpha="0.7"
+        android:background="@color/colorAccent"
         android:text="투표 생성하기"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.448" />
+        app:layout_constraintTop_toBottomOf="@+id/dt_time"
+        android:textStyle="bold"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

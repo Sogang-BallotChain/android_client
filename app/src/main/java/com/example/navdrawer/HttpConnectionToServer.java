@@ -1,14 +1,5 @@
-package com.example.navdrawer.ui.create_vote;
+package com.example.navdrawer;
 
-//1014 for http connection
-
-import android.os.AsyncTask;
-
-import org.apache.http.conn.ConnectTimeoutException;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -17,35 +8,27 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.List;
-import java.util.Map;
-import java.io.ByteArrayOutputStream;
 
 
 
-
-public class httpConnection {
+public class  HttpConnectionToServer {
 
     String urlString = "http://www.ballotchain.net/user/signup";
-    //String urlString = "http://www.ballotchain.net/testapi/20141508";
-    private final String USER_AGENT = "Mozilla/5.0";
-    //생성자
-    httpConnection() {
+
+    //생성자 no meaning
+    public HttpConnectionToServer() {
         ;
     }
 
 
-    //just connect to remote server.
-    public Boolean ConnectRemoteServer() {
+    //connect to server and create Account, 1101
+    public Boolean CreateAccount(String email, String password) {
         try {
             URL url = new URL(urlString);
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 
             //post 세팅
-            String data = "{" + "\"email\":\"pineleaf1215@gmail.com\"," +"\"password\":\"1234\""
-                    +"}";
-
-
+            String data = "{" + "\"email\":\""+email+"\"," +"\"password\":\""+password+"\"" +"}";
 
 
             //각종세팅.
@@ -61,16 +44,6 @@ public class httpConnection {
             wr.writeBytes(data);
             wr.flush();
             wr.close();
-            /*
-            BufferedReader in = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-            String inputLine;
-            StringBuffer response = new StringBuffer();
-
-            while((inputLine = in.readLine()) != null){
-                response.append(inputLine);
-            }
-            in.close();
-            */
 
             // 요청 방식 구하기
             System.out.println("getRequestMethod():" + urlConnection.getRequestMethod());
@@ -93,7 +66,6 @@ public class httpConnection {
             }
             result = sb.toString();
             System.out.println("we got"+result);
-
 
             return true;
         } catch (MalformedURLException e) {

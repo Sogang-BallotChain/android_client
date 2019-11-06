@@ -20,6 +20,9 @@ public class  HttpConnectionToServer {
         ;
     }
 
+    //connect to server and request and get vote imformation
+
+    //connect to server and POST vote creation
 
     //connect to server and create Account, 1101
     public Boolean CreateAccount(String email, String password) {
@@ -78,7 +81,6 @@ public class  HttpConnectionToServer {
             return false;
         }
     }
-
     //
 
 

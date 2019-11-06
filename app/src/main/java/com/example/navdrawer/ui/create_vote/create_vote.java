@@ -107,6 +107,11 @@ public class create_vote extends Fragment {
 
         });
 
+        //setting unix time
+        long current_unixTime = System.currentTimeMillis() / 1000L;
+
+        System.out.println("current unix time" + current_unixTime);
+
         return root;
     }//onCreate
 
@@ -188,6 +193,8 @@ public class create_vote extends Fragment {
                 //Toast.makeText(getActivity(), "connect failure", Toast.LENGTH_SHORT).show();
                 return false;
             }
+
+
         }
 
     }

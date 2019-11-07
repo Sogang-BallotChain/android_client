@@ -32,8 +32,8 @@ import java.util.Date;
 
 
 public class HomeFragment extends Fragment {
-    EditText nameInput;
     EditText emailInput;
+    EditText pwInput;
 
     //kdh
     //object email , password , passing to asynctask
@@ -63,8 +63,8 @@ public class HomeFragment extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_home, container, false);
 
 
-        nameInput = rootView.findViewById(R.id.nameInput);
         emailInput = rootView.findViewById(R.id.emailInput);
+        pwInput = rootView.findViewById(R.id.pwInput);
 
  //       birthButton = rootView.findViewById(R.id.birthButton);
  //       birthButton.setOnClickListener(new View.OnClickListener() {
@@ -73,12 +73,12 @@ public class HomeFragment extends Fragment {
  //           }
  //       });
 
-        Button saveButton = rootView.findViewById(R.id.saveButton);
+        Button saveButton = rootView.findViewById(R.id.loginButton);
         saveButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 NetworkTask ConnectCreateVoteModel = new NetworkTask();
-                String nameStr = nameInput.getText().toString();
-                String emailStr = emailInput.getText().toString();
+                String nameStr = emailInput.getText().toString();
+                String emailStr = pwInput.getText().toString();
 //                String birthStr = birthButton.getText().toString();
                 EmailPassWord params =  new EmailPassWord(nameStr,emailStr);
                 ConnectCreateVoteModel.execute(params);

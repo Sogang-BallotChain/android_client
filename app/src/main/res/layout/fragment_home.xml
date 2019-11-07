@@ -23,22 +23,22 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
                 >
+
                 <TextView
-                    android:id="@+id/nameLabel"
-                    android:text="  이      름  "
-                    android:textColor="#ff222222"
-                    android:textSize="16sp"
+                    android:id="@+id/emailLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    />
+                    android:text="     이 메 일  "
+                    android:textColor="#ff222222"
+                    android:textSize="16sp" />
+
                 <EditText
-                    android:id="@+id/nameInput"
-                    android:layout_width="120dp"
+                    android:id="@+id/emailInput"
+                    android:layout_width="200dp"
                     android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@id/nameLabel"
+                    android:layout_alignBaseline="@id/emailLabel"
                     android:inputType="textPersonName"
-                    android:privateImeOptions="defaultInputmode=korean"
-                    />
+                    android:privateImeOptions="defaultInputmode=korean" />
             </LinearLayout>
             <LinearLayout
                 android:orientation="horizontal"
@@ -46,19 +46,20 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
                 >
+
                 <TextView
-                    android:id="@+id/emailLabel"
-                    android:text="  이  메  일  "
-                    android:textColor="#ff222222"
-                    android:textSize="16sp"
+                    android:id="@+id/pwLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    />
+                    android:text=" 비 밀 번 호 "
+                    android:textColor="#ff222222"
+                    android:textSize="16sp" />
+
                 <EditText
-                    android:id="@+id/emailInput"
-                    android:layout_width="120dp"
+                    android:id="@+id/pwInput"
+                    android:layout_width="200dp"
                     android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@id/emailLabel"
+                    android:layout_alignBaseline="@id/pwLabel"
 
 
                     />
@@ -76,6 +77,7 @@
                 android:layout_margin="4dp"
                 />
         </LinearLayout>
+
         <Button
             android:id="@+id/saveButton"
             android:layout_width="120dp"
@@ -83,8 +85,7 @@
             android:layout_below="@+id/contentsLayout"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="30dp"
-            android:text="저 장"
-            />
+            android:text="로 그 인" />
     </RelativeLayout>
 
 </RelativeLayout>

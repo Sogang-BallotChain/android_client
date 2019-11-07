@@ -73,7 +73,7 @@ public class HomeFragment extends Fragment {
  //           }
  //       });
 
-        Button saveButton = rootView.findViewById(R.id.saveButton);
+        Button saveButton = rootView.findViewById(R.id.loginButton);
         saveButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 NetworkTask ConnectCreateVoteModel = new NetworkTask();

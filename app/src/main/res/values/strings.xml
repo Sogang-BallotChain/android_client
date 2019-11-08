@@ -7,7 +7,7 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
-    <string name="menu_home">Home</string>
+    <string name="menu_home">회원 가입</string>
     <string name="menu_gallery">투표 생성</string>
     <string name="menu_slideshow">투표 참여</string>
     <string name="menu_tools">끝난 투표</string>

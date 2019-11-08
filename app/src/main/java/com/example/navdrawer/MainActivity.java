@@ -2,11 +2,20 @@ package com.example.navdrawer;
 
 import android.os.Bundle;
 
+import com.example.navdrawer.ui.create_vote.create_vote;
+import com.example.navdrawer.ui.home.HomeFragment;
+import com.example.navdrawer.ui.join_vote.join_vote;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import android.view.MenuItem;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -23,24 +32,51 @@ import android.view.Menu;
 
 public class MainActivity extends AppCompatActivity {
 
-    private AppBarConfiguration mAppBarConfiguration;
+    private BottomNavigationView bottomNavigationView; // 바텀 네비게이션 뷰
+    private FragmentManager fm;
+    private FragmentTransaction ft;
+    private create_vote frag1;
+    private HomeFragment frag2;
+    private join_vote frag3;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+
+
+        ConstraintLayout drawer = findViewById(R.id.main_layout);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavi);
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener()
+        {
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem)
+            {
+                switch (menuItem.getItemId())
+                {
+                    case R.id.action_today:
+                        setFrag(0);
+                        break;
+                    case R.id.action_add:
+                        setFrag(1);
+                        break;
+                    case R.id.action_setting:
+                        setFrag(2);
+                        break;
+                }
+                return true;
             }
         });
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
+
+        frag1=new create_vote();
+        frag2=new HomeFragment();
+        frag3=new join_vote();
+        setFrag(0); // 첫 프래그먼트 화면 지정
+    }
+
+        /*
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
@@ -51,19 +87,31 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
-    }
+         */
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
+    // 프레그먼트 교체
+    private void setFrag(int n)
+    {
+        fm = getSupportFragmentManager();
+        ft= fm.beginTransaction();
+        switch (n)
+        {
+            case 0:
+                ft.replace(R.id.Main_Frame,frag1);
+                ft.commit();
+                break;
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
-                || super.onSupportNavigateUp();
+            case 1:
+                ft.replace(R.id.Main_Frame,frag2);
+                ft.commit();
+                break;
+
+            case 2:
+                ft.replace(R.id.Main_Frame,frag3);
+                ft.commit();
+                break;
+
+
+        }
     }
 }

@@ -38,15 +38,7 @@ public class create_vote extends Fragment {
         createVoteModel =
                 ViewModelProviders.of(this).get(CreateVoteModel.class);
         View root = inflater.inflate(R.layout.create_vote, container, false);
-        /* default code before i write
-        final TextView textView = root.findViewById(R.id.text_gallery);
-        createVoteModel.getText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
-        */
+
         //for date,time setting 1014 ,setting starting date
         Button button_date_st = root.findViewById(R.id.st_month);
         button_date_st.setOnClickListener(new View.OnClickListener() {

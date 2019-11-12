@@ -4,17 +4,18 @@
         android:id="@+id/action_today"
         android:enabled="true"
         android:icon="@drawable/ic_menu_camera"
-        android:title="오늘의 일정"/>
+        android:title="투표 생성"/>
 
     <item
         android:id="@+id/action_add"
         android:enabled="true"
         android:icon="@drawable/ic_menu_gallery"
-        android:title="일정 추가"/>
+        android:title="회원가입"/>
 
     <item
         android:id="@+id/action_setting"
         android:enabled="true"
         android:icon="@drawable/ic_menu_slideshow"
-        android:title="설정"/>
+        android:title="투표 조회"/>
+
 </menu>

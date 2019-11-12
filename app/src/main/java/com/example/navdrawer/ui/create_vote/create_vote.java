@@ -19,15 +19,49 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 //for HttpConnectionToServer 1101
 
-
 public class create_vote extends Fragment {
+
+
+
+
+    JSONObject createVoteJson(String voteName, long st_unix, long dt_unix, JSONArray candidates){
+        JSONObject createVoteRequest = new JSONObject();
+
+        try{
+            createVoteRequest.put("name",voteName);
+            createVoteRequest.put("start_time", st_unix);
+            createVoteRequest.put("end_time", dt_unix);
+            createVoteRequest.put("candidate_list",candidates);
+        }catch(JSONException e){
+            e.printStackTrace();
+        }
+        return createVoteRequest;
+    }
+
+    //vote name
+    EditText editTextName;
+    JSONArray candidate_list = new JSONArray();
+
     //for date,time setting 1014 , start, destination.
     int st_y=0, st_m=0, st_d=0, st_h=0, st_mi=0;
     int dt_y=0, dt_m=0, dt_d=0, dt_h=0, dt_mi=0;
+    long st_unix,dt_unix;
 
     //CreateVoteModel 클래스는 무슨 역할인거지?
     private CreateVoteModel createVoteModel;
@@ -38,6 +72,10 @@ public class create_vote extends Fragment {
         createVoteModel =
                 ViewModelProviders.of(this).get(CreateVoteModel.class);
         View root = inflater.inflate(R.layout.create_vote, container, false);
+        //get text from TextField
+        editTextName = root.findViewById(R.id.vote_topic);
+
+
 
         //for date,time setting 1014 ,setting starting date
         Button button_date_st = root.findViewById(R.id.st_month);
@@ -59,7 +97,7 @@ public class create_vote extends Fragment {
             @Override
             public void onClick(View v){
                 Toast.makeText(getActivity(), st_y+"."+st_m+"."+st_d+"\n"+st_h+":" + st_mi, Toast.LENGTH_SHORT).show();
-
+                st_unix = dateToUnixTime(st_y,st_m,st_d,st_h,st_mi);
             }
         });
 
@@ -83,7 +121,7 @@ public class create_vote extends Fragment {
             @Override
             public void onClick(View v){
                 Toast.makeText(getActivity(), dt_y+"."+dt_m+"."+dt_d+"\n"+dt_h+":" + dt_mi, Toast.LENGTH_SHORT).show();
-
+                dt_unix = dateToUnixTime(dt_y,dt_m,dt_d,dt_h,dt_mi);
             }
         });
 
@@ -91,18 +129,27 @@ public class create_vote extends Fragment {
         //for HttpConnectionToServer 1101
         Button CreateVoteButton = root.findViewById(R.id.CreateVoteButton);
         CreateVoteButton.setOnClickListener(new View.OnClickListener(){
+            String voteName = editTextName.getText().toString();
+
+
+
             NetworkTask ConnectCreateVoteModel = new NetworkTask();
             @Override
             public void onClick(View v) {
-                ConnectCreateVoteModel.execute();
+                //for test not implemented list adding ui
+                candidate_list.put("아이유");
+                candidate_list.put("사나");
+                candidate_list.put("쯔위");
+                System.out.println("candidate_list "+candidate_list);
+                //System.out.println("st_unix: "+st_unix+"dt_unix"+dt_unix+"\n");
+                JSONObject JO  = createVoteJson(voteName,st_unix,dt_unix,candidate_list);
+
+                System.out.println("json생성:" + JO.toString() +"\n");
+                ConnectCreateVoteModel.execute(JO);
             }
 
         });
 
-        //setting unix time
-        long current_unixTime = System.currentTimeMillis() / 1000L;
-
-        System.out.println("current unix time" + current_unixTime);
 
         return root;
     }//onCreate
@@ -162,20 +209,16 @@ public class create_vote extends Fragment {
 
 
     //thread for http connection, real http conntection is executed on 'HttpConnectionToServer' class
-    public class NetworkTask extends AsyncTask<Void,Void,Boolean>{
-        private String url;
-        private ContentValues values;
-
+    public class NetworkTask extends AsyncTask<JSONObject,Void,Boolean>{
         public NetworkTask(){
             ;
         }
 
         @Override
-        protected Boolean doInBackground(Void... params) {
+        protected Boolean doInBackground(JSONObject... params) {
             HttpConnectionToServer ConnectCreateVoteModel = new HttpConnectionToServer();
-            String email = "pineleaf1216@gmail.com";
-            String pass = "12345";
-            if(ConnectCreateVoteModel.CreateAccount(email,pass)) {
+
+            if(ConnectCreateVoteModel.CreateVote(params[0]) ){
                 System.out.println("server connected true\n");
                 //Toast.makeText(getActivity(), "connected", Toast.LENGTH_SHORT).show();
                 return true;
@@ -190,4 +233,39 @@ public class create_vote extends Fragment {
         }
 
     }
-}
+
+    //for date,time setting 1014 , start, destination.
+    //int st_y=0, st_m=0, st_d=0, st_h=0, st_mi=0;
+
+    long dateToUnixTime(int y,int m,int d,int h,int mi){
+        //2019.2.11 21:11
+        String dateString = "";
+        Date date;
+
+        //concatenate string
+        dateString = dateString+ Integer.toString(y) + fill2String(m) + fill2String(d)
+                + fill2String(h) + fill2String(mi);
+
+        System.out.println(dateString);
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmm");
+        try {
+            date = dateFormat.parse(dateString);
+            long unixTime = (long)date.getTime()/1000;
+            System.out.println(unixTime); //<- prints 1352504418
+            return unixTime;
+        }
+        catch (ParseException ex) {
+            ex.printStackTrace();
+            return -1;
+        }
+
+
+    }
+
+    String fill2String(int x){
+        String filled = String.format("%02d",x);
+        return filled;
+    }
+
+}//create_vote fragment

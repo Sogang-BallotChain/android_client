@@ -141,11 +141,12 @@
         android:alpha="0.7"
         android:background="@color/colorAccent"
         android:text="투표 생성하기"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dt_time"
-        android:textStyle="bold"
-        />
+        app:layout_constraintVertical_bias="0.207" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

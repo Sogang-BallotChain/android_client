@@ -77,12 +77,12 @@ public class HomeFragment extends Fragment {
         saveButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 NetworkTask ConnectCreateVoteModel = new NetworkTask();
-                String nameStr = emailInput.getText().toString();
-                String emailStr = pwInput.getText().toString();
+                String emailStr = emailInput.getText().toString();
+                String pwStr = pwInput.getText().toString();
 //                String birthStr = birthButton.getText().toString();
-                EmailPassWord params =  new EmailPassWord(nameStr,emailStr);
+                EmailPassWord params =  new EmailPassWord(emailStr,pwStr);
                 ConnectCreateVoteModel.execute(params);
-                Toast.makeText(getContext(), "이름 : " + nameStr + ", 이메일 : " + emailStr, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "이메일 : " + emailStr + ", 비밀번호 : " + pwStr, Toast.LENGTH_SHORT).show();
             }
         });
 

@@ -1,5 +1,6 @@
 package com.example.navdrawer;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -30,6 +31,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
+import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -45,7 +47,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        startActivity(new Intent(this,SplashActivity.class)); //new Intent는 context와 class를 인자로 받습니다. //만들어둔 SplashActivity를 호출합니다
+
+        Button logoutButton = (Button) findViewById(R.id.logoutButton);
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent resultIntent = new Intent();
+                resultIntent.putExtra("menu", "고객관리 메뉴");
+                resultIntent.putExtra("message", "result message is OK!");
+
+                setResult(Activity.RESULT_OK, resultIntent);
+                finish();
+            }
+        });
 
         ConstraintLayout drawer = findViewById(R.id.main_layout);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavi);

@@ -102,7 +102,7 @@ public class  HttpConnectionToServer {
             urlConnection.setDoOutput(true);
             DataOutputStream wr = new DataOutputStream(urlConnection.getOutputStream());
             System.out.println("clients sending :"+JO.toString() +"\n");
-            wr.writeBytes(JO.toString());
+            wr.write(JO.toString().getBytes("utf-8"));
             wr.flush();
             wr.close();
 

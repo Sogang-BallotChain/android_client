@@ -40,7 +40,7 @@ public class create_vote extends Fragment {
 
 
 
-    JSONObject createVoteJson(String voteName, long st_unix, long dt_unix, JSONArray candidates){
+    JSONObject createVoteJson(String voteName, long st_unix, long dt_unix, JSONArray candidates,String email){
         JSONObject createVoteRequest = new JSONObject();
 
         try{
@@ -48,6 +48,7 @@ public class create_vote extends Fragment {
             createVoteRequest.put("start_time", st_unix);
             createVoteRequest.put("end_time", dt_unix);
             createVoteRequest.put("candidate_list",candidates);
+            createVoteRequest.put("email",email);
         }catch(JSONException e){
             e.printStackTrace();
         }
@@ -59,9 +60,10 @@ public class create_vote extends Fragment {
     JSONArray candidate_list = new JSONArray();
 
     //for date,time setting 1014 , start, destination.
+    String email;
     int st_y=0, st_m=0, st_d=0, st_h=0, st_mi=0;
     int dt_y=0, dt_m=0, dt_d=0, dt_h=0, dt_mi=0;
-    long st_unix,dt_unix;
+    long st_unix= 1000,dt_unix = 10000;
 
     //CreateVoteModel 클래스는 무슨 역할인거지?
     private CreateVoteModel createVoteModel;
@@ -137,12 +139,14 @@ public class create_vote extends Fragment {
             @Override
             public void onClick(View v) {
                 //for test not implemented list adding ui
+                email = "pineleaf1216@gmail.com";
                 candidate_list.put("아이유");
                 candidate_list.put("사나");
                 candidate_list.put("쯔위");
                 System.out.println("candidate_list "+candidate_list);
                 //System.out.println("st_unix: "+st_unix+"dt_unix"+dt_unix+"\n");
-                JSONObject JO  = createVoteJson(voteName,st_unix,dt_unix,candidate_list);
+
+                JSONObject JO  = createVoteJson(voteName,st_unix,dt_unix,candidate_list,email);
 
                 System.out.println("json생성:" + JO.toString() +"\n");
                 ConnectCreateVoteModel.execute(JO);

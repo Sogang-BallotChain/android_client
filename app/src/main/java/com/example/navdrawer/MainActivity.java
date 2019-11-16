@@ -1,5 +1,6 @@
 package com.example.navdrawer;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.navdrawer.ui.create_vote.create_vote;
@@ -29,6 +30,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -74,7 +77,22 @@ public class MainActivity extends AppCompatActivity {
         frag2=new HomeFragment();
         frag3=new join_vote();
         setFrag(0); // 첫 프래그먼트 화면 지정
-    }
+
+
+
+    }//OnCreate
+
+            /*
+        //get From seediscriptionJoinVote
+        Intent intent = getIntent();
+        final ArrayList<String> items = intent.getStringArrayListExtra("items");
+
+        for(int i=0;i<items.size();i++){
+            System.out.println("num:" + i + items.get(i) + "\n");
+        }
+
+         */
+
 
         /*
         // Passing each menu ID as a set of Ids because each

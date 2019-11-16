@@ -1,6 +1,6 @@
 package com.example.navdrawer.ui.create_vote;
 
-import android.content.ContentValues;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.navdrawer.HttpConnectionToServer;
 import com.example.navdrawer.R;
+import com.example.navdrawer.SeeDiscriptionAndJoinVote;
 
 //for date,time setting 1014
 import android.app.DatePickerDialog;
@@ -32,12 +33,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 //for HttpConnectionToServer 1101
 
 public class create_vote extends Fragment {
-
-
 
 
     JSONObject createVoteJson(String voteName, long st_unix, long dt_unix, JSONArray candidates,String email){
@@ -64,6 +62,7 @@ public class create_vote extends Fragment {
     int st_y=0, st_m=0, st_d=0, st_h=0, st_mi=0;
     int dt_y=0, dt_m=0, dt_d=0, dt_h=0, dt_mi=0;
     long st_unix= 1000,dt_unix = 10000;
+    final int REQUEST_TEST = 1;
 
     //CreateVoteModel 클래스는 무슨 역할인거지?
     private CreateVoteModel createVoteModel;
@@ -73,9 +72,24 @@ public class create_vote extends Fragment {
 
         createVoteModel =
                 ViewModelProviders.of(this).get(CreateVoteModel.class);
-        View root = inflater.inflate(R.layout.create_vote, container, false);
+        final View root = inflater.inflate(R.layout.create_vote, container, false);
         //get text from TextField
         editTextName = root.findViewById(R.id.vote_topic);
+
+
+        //register candidates
+        //push Button and move to SeeDiscriptionAndJOinVote
+        Button intentButton = root.findViewById(R.id.email_uploads);
+        intentButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //    Toast.makeText(getActivity(), "clicked", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(getActivity() , SeeDiscriptionAndJoinVote.class);
+                startActivityForResult(intent,REQUEST_TEST);
+                //startActivity(intent);
+            }
+        } );
 
 
 
@@ -133,8 +147,6 @@ public class create_vote extends Fragment {
         CreateVoteButton.setOnClickListener(new View.OnClickListener(){
             String voteName = editTextName.getText().toString();
 
-
-
             NetworkTask ConnectCreateVoteModel = new NetworkTask();
             @Override
             public void onClick(View v) {
@@ -157,6 +169,19 @@ public class create_vote extends Fragment {
 
         return root;
     }//onCreate
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_TEST) {
+            final ArrayList<String> items = data.getStringArrayListExtra("items");
+            for(int i=0;i<items.size();i++) {
+                System.out.println("#"+i+items.get(i));
+            }
+        }
+    }
 
     //methods for setting starting date,time
     void st_showDate(){
@@ -271,5 +296,7 @@ public class create_vote extends Fragment {
         String filled = String.format("%02d",x);
         return filled;
     }
+
+
 
 }//create_vote fragment

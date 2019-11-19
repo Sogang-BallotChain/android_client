@@ -20,7 +20,7 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
-public class SeeDiscriptionAndJoinVote extends AppCompatActivity {
+public class AddCandidates extends AppCompatActivity {
 
 
 

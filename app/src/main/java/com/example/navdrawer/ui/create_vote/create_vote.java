@@ -13,7 +13,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.navdrawer.HttpConnectionToServer;
 import com.example.navdrawer.R;
-import com.example.navdrawer.SeeDiscriptionAndJoinVote;
+import com.example.navdrawer.AddCandidates;
 
 //for date,time setting 1014
 import android.app.DatePickerDialog;
@@ -85,7 +85,7 @@ public class create_vote extends Fragment {
             public void onClick(View view) {
                 //    Toast.makeText(getActivity(), "clicked", Toast.LENGTH_SHORT).show();
 
-                Intent intent = new Intent(getActivity() , SeeDiscriptionAndJoinVote.class);
+                Intent intent = new Intent(getActivity() , AddCandidates.class);
                 startActivityForResult(intent,REQUEST_TEST);
                 //startActivity(intent);
             }

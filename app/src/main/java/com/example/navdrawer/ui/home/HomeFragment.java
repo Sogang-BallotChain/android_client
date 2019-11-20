@@ -1,31 +1,20 @@
 package com.example.navdrawer.ui.home;
 
-import android.app.DatePickerDialog;
 import android.content.ContentValues;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.example.navdrawer.HttpConnectionToServer;
 import com.example.navdrawer.R;
-import com.example.navdrawer.ui.create_vote.create_vote;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 //kdh
@@ -119,7 +108,7 @@ public class HomeFragment extends Fragment {
 
             if(ConnectCreateVoteModel.CreateAccount(email,pass)) {
                 System.out.println("server connected true\n");
-                //Toast.makeText(getActivity(), "connected", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "connected", Toast.LENGTH_SHORT).show();
                 return true;
             }
             else{

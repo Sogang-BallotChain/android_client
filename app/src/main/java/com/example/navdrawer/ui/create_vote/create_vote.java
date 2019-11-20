@@ -1,6 +1,6 @@
 package com.example.navdrawer.ui.create_vote;
 
-import android.content.ContentValues;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.navdrawer.HttpConnectionToServer;
 import com.example.navdrawer.R;
+import com.example.navdrawer.AddCandidates;
 
 //for date,time setting 1014
 import android.app.DatePickerDialog;
@@ -32,15 +33,12 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 //for HttpConnectionToServer 1101
 
 public class create_vote extends Fragment {
 
 
-
-
-    JSONObject createVoteJson(String voteName, long st_unix, long dt_unix, JSONArray candidates){
+    JSONObject createVoteJson(String voteName, long st_unix, long dt_unix, JSONArray candidates,String email){
         JSONObject createVoteRequest = new JSONObject();
 
         try{
@@ -48,6 +46,7 @@ public class create_vote extends Fragment {
             createVoteRequest.put("start_time", st_unix);
             createVoteRequest.put("end_time", dt_unix);
             createVoteRequest.put("candidate_list",candidates);
+            createVoteRequest.put("email",email);
         }catch(JSONException e){
             e.printStackTrace();
         }
@@ -59,9 +58,11 @@ public class create_vote extends Fragment {
     JSONArray candidate_list = new JSONArray();
 
     //for date,time setting 1014 , start, destination.
+    String email;
     int st_y=0, st_m=0, st_d=0, st_h=0, st_mi=0;
     int dt_y=0, dt_m=0, dt_d=0, dt_h=0, dt_mi=0;
-    long st_unix,dt_unix;
+    long st_unix= 1000,dt_unix = 10000;
+    final int REQUEST_TEST = 1;
 
     //CreateVoteModel 클래스는 무슨 역할인거지?
     private CreateVoteModel createVoteModel;
@@ -71,9 +72,24 @@ public class create_vote extends Fragment {
 
         createVoteModel =
                 ViewModelProviders.of(this).get(CreateVoteModel.class);
-        View root = inflater.inflate(R.layout.create_vote, container, false);
+        final View root = inflater.inflate(R.layout.create_vote, container, false);
         //get text from TextField
-        editTextName = root.findViewById(R.id.vote_topic);
+        final EditText emailAddress = (EditText)root.findViewById(R.id.email_addr);
+        editTextName = (EditText)root.findViewById(R.id.vote_title);
+
+        //register candidates
+        //push Button and move to SeeDiscriptionAndJOinVote
+        Button intentButton = root.findViewById(R.id.email_uploads);
+        intentButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //    Toast.makeText(getActivity(), "clicked", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(getActivity() , AddCandidates.class);
+                startActivityForResult(intent,REQUEST_TEST);
+                //startActivity(intent);
+            }
+        } );
 
 
 
@@ -129,20 +145,18 @@ public class create_vote extends Fragment {
         //for HttpConnectionToServer 1101
         Button CreateVoteButton = root.findViewById(R.id.CreateVoteButton);
         CreateVoteButton.setOnClickListener(new View.OnClickListener(){
-            String voteName = editTextName.getText().toString();
-
-
+            String voteName;
 
             NetworkTask ConnectCreateVoteModel = new NetworkTask();
             @Override
             public void onClick(View v) {
                 //for test not implemented list adding ui
-                candidate_list.put("아이유");
-                candidate_list.put("사나");
-                candidate_list.put("쯔위");
+                voteName =  editTextName.getText().toString();
+                email = emailAddress.getText().toString();
                 System.out.println("candidate_list "+candidate_list);
                 //System.out.println("st_unix: "+st_unix+"dt_unix"+dt_unix+"\n");
-                JSONObject JO  = createVoteJson(voteName,st_unix,dt_unix,candidate_list);
+
+                JSONObject JO  = createVoteJson(voteName,st_unix,dt_unix,candidate_list,email);
 
                 System.out.println("json생성:" + JO.toString() +"\n");
                 ConnectCreateVoteModel.execute(JO);
@@ -153,6 +167,22 @@ public class create_vote extends Fragment {
 
         return root;
     }//onCreate
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_TEST) {
+            final ArrayList<String> items = data.getStringArrayListExtra("items");
+            //add to JsonArray here
+            for(int i=0;i<items.size();i++) {
+                System.out.println("#"+i+items.get(i));
+                //    JSONArray candidate_list = new JSONArray();
+                candidate_list.put(items.get(i));
+            }
+        }
+    }
 
     //methods for setting starting date,time
     void st_showDate(){
@@ -267,5 +297,7 @@ public class create_vote extends Fragment {
         String filled = String.format("%02d",x);
         return filled;
     }
+
+
 
 }//create_vote fragment

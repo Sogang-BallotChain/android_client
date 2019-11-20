@@ -1,6 +1,5 @@
 package com.example.navdrawer;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -31,7 +30,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
-import android.widget.Button;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -48,17 +48,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button logoutButton = (Button) findViewById(R.id.logoutButton);
-        logoutButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent resultIntent = new Intent();
-                resultIntent.putExtra("menu", "고객관리 메뉴");
-                resultIntent.putExtra("message", "result message is OK!");
-
-                setResult(Activity.RESULT_OK, resultIntent);
-                finish();
-            }
-        });
 
         ConstraintLayout drawer = findViewById(R.id.main_layout);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavi);
@@ -88,7 +77,22 @@ public class MainActivity extends AppCompatActivity {
         frag2=new HomeFragment();
         frag3=new join_vote();
         setFrag(0); // 첫 프래그먼트 화면 지정
-    }
+
+
+
+    }//OnCreate
+
+            /*
+        //get From seediscriptionJoinVote
+        Intent intent = getIntent();
+        final ArrayList<String> items = intent.getStringArrayListExtra("items");
+
+        for(int i=0;i<items.size();i++){
+            System.out.println("num:" + i + items.get(i) + "\n");
+        }
+
+         */
+
 
         /*
         // Passing each menu ID as a set of Ids because each

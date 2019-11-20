@@ -17,16 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity
-            android:name=".LoginActivity"
-            android:label="@string/app_name" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".SeeDiscriptionAndJoinVote"></activity>
+        <activity android:name=".AddCandidates" />
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
@@ -36,8 +27,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".SplashActivity" android:theme="@android:style/Theme.NoTitleBar">
         </activity>
     </application>
 

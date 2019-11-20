@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".SeeDiscriptionAndJoinVote"
+    tools:context=".AddCandidates"
     android:orientation="vertical">
 
 
@@ -22,18 +22,53 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="투표 이름" />
+            android:text="후보자 입력 화면입니다." />
+    </LinearLayout>
 
 
-        <TextView
-            android:id="@+id/duration"
-            android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <EditText android:id="@+id/edit_candidates"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="투표 기간" />
+            android:hint ="후보자 입력하세요"
+            />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button android:id= "@+id/AddCandidateButton"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textSize="20dp"
+            android:text="추가하기"
+            android:layout_gravity="center"
+            />
+
+        <Button android:id= "@+id/DeleteButtonCandidates"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textSize="20dp"
+            android:text="삭제하기"
+            android:layout_gravity="center"
+            />
+
+        <Button android:id= "@+id/RegisterButtonCandidates"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textSize="20dp"
+            android:text="등록하기"
+            android:layout_gravity="center"
+            />
 
 
     </LinearLayout>
+
 
     <ListView
         android:id="@+id/listview1"

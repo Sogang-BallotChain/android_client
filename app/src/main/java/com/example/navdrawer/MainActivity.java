@@ -1,37 +1,21 @@
 package com.example.navdrawer;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.navdrawer.ui.create_vote.create_vote;
-import com.example.navdrawer.ui.home.HomeFragment;
-import com.example.navdrawer.ui.join_vote.join_vote;
+import com.example.navdrawer.ui.create_account.createAccount_Fragment;
+import com.example.navdrawer.ui.join_vote.joinVote_Fragment;
+import com.example.navdrawer.ui.seeThrough_vote.seeThrough_Fragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import android.view.MenuItem;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-
-import com.google.android.material.navigation.NavigationView;
-
-import androidx.drawerlayout.widget.DrawerLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-import android.view.Menu;
-
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,8 +23,8 @@ public class MainActivity extends AppCompatActivity {
     private FragmentManager fm;
     private FragmentTransaction ft;
     private create_vote frag1;
-    private HomeFragment frag2;
-    private join_vote frag3;
+    private joinVote_Fragment frag2;
+    private seeThrough_Fragment frag3;
 
 
     @Override
@@ -74,38 +58,14 @@ public class MainActivity extends AppCompatActivity {
         });
 
         frag1=new create_vote();
-        frag2=new HomeFragment();
-        frag3=new join_vote();
+        frag2=new joinVote_Fragment();
+        frag3=new seeThrough_Fragment();
         setFrag(0); // 첫 프래그먼트 화면 지정
 
 
 
     }//OnCreate
 
-            /*
-        //get From seediscriptionJoinVote
-        Intent intent = getIntent();
-        final ArrayList<String> items = intent.getStringArrayListExtra("items");
-
-        for(int i=0;i<items.size();i++){
-            System.out.println("num:" + i + items.get(i) + "\n");
-        }
-
-         */
-
-
-        /*
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow,
-                R.id.nav_tools, R.id.nav_share, R.id.nav_send)
-                .setDrawerLayout(drawer)
-                .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-        NavigationUI.setupWithNavController(navigationView, navController);
-         */
 
     // 프레그먼트 교체
     private void setFrag(int n)

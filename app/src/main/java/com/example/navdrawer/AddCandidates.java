@@ -21,22 +21,38 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 
 public class AddCandidates extends AppCompatActivity {
+    EditText edittext;
+    Button buttonAdd;
+    ArrayList<String> items;
+    ArrayAdapter adapter;
 
+    @Override
+    public void onBackPressed() {
+        //버튼 클릭시 리스트에 추가.
+        Intent intent = new Intent();
+        intent.putExtra("items",items);
+        setResult(RESULT_OK,intent);
+        finish();
 
+       // super.onBackPressed();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_see_discription_and_join_vote);
 
         //화면 ui들
-        final EditText edittext = (EditText)findViewById(R.id.edit_candidates);
-        Button buttonAdd = (Button)findViewById(R.id.AddCandidateButton);
+        edittext = (EditText)findViewById(R.id.edit_candidates);
+        buttonAdd = (Button)findViewById(R.id.AddCandidateButton);
         Button buttonDelete = (Button)findViewById(R.id.DeleteButtonCandidates);
         Button buttonRegister = (Button)findViewById(R.id.RegisterButtonCandidates);
         //빈 데이터 리스트 생성.
-        final ArrayList<String> items = new ArrayList<String>();
-        final ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_multiple_choice,items);
+        items = new ArrayList<String>();
+        adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_multiple_choice,items);
 
         final ListView listview = (ListView) findViewById(R.id.listview1);
         listview.setAdapter(adapter);

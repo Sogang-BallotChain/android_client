@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.navdrawer.R;
 
-public class join_vote extends Fragment {
+public class joinVote_Fragment extends Fragment {
 
     private JoinVoteModel joinVoteModel;
 

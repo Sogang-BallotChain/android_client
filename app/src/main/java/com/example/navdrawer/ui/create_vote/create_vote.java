@@ -74,8 +74,8 @@ public class create_vote extends Fragment {
                 ViewModelProviders.of(this).get(CreateVoteModel.class);
         final View root = inflater.inflate(R.layout.create_vote, container, false);
         //get text from TextField
-        editTextName = root.findViewById(R.id.vote_topic);
-
+        final EditText emailAddress = (EditText)root.findViewById(R.id.email_addr);
+        editTextName = (EditText)root.findViewById(R.id.vote_title);
 
         //register candidates
         //push Button and move to SeeDiscriptionAndJOinVote
@@ -145,16 +145,14 @@ public class create_vote extends Fragment {
         //for HttpConnectionToServer 1101
         Button CreateVoteButton = root.findViewById(R.id.CreateVoteButton);
         CreateVoteButton.setOnClickListener(new View.OnClickListener(){
-            String voteName = editTextName.getText().toString();
+            String voteName;
 
             NetworkTask ConnectCreateVoteModel = new NetworkTask();
             @Override
             public void onClick(View v) {
                 //for test not implemented list adding ui
-                email = "pineleaf1216@gmail.com";
-                candidate_list.put("아이유");
-                candidate_list.put("사나");
-                candidate_list.put("쯔위");
+                voteName =  editTextName.getText().toString();
+                email = emailAddress.getText().toString();
                 System.out.println("candidate_list "+candidate_list);
                 //System.out.println("st_unix: "+st_unix+"dt_unix"+dt_unix+"\n");
 
@@ -177,8 +175,11 @@ public class create_vote extends Fragment {
 
         if (requestCode == REQUEST_TEST) {
             final ArrayList<String> items = data.getStringArrayListExtra("items");
+            //add to JsonArray here
             for(int i=0;i<items.size();i++) {
                 System.out.println("#"+i+items.get(i));
+                //    JSONArray candidate_list = new JSONArray();
+                candidate_list.put(items.get(i));
             }
         }
     }

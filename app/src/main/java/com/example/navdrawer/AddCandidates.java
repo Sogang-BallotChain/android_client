@@ -84,17 +84,6 @@ public class AddCandidates extends AppCompatActivity {
 
         });
 
-/*
-        //item추가
-        int count;
-        for(int i=0;i<4;i++) {
-            count = adapter.getCount();
-            items.add("List" + Integer.toString(count + 1));
-          //  Toast.makeText(this, "clicked", Toast.LENGTH_SHORT).show();
-        }
-        //listview 갱신
-                adapter.notifyDataSetChanged();
-*/
 
     }
 

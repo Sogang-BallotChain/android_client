@@ -1,5 +1,6 @@
 package com.example.navdrawer;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -30,6 +31,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
+import android.widget.Button;
 
 import java.util.ArrayList;
 
@@ -48,6 +50,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Button logoutButton = (Button) findViewById(R.id.logoutButton);
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent resultIntent = new Intent();
+                resultIntent.putExtra("menu", "고객관리 메뉴");
+                resultIntent.putExtra("message", "result message is OK!");
+
+                setResult(Activity.RESULT_OK, resultIntent);
+                finish();
+            }
+        });
 
         ConstraintLayout drawer = findViewById(R.id.main_layout);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavi);

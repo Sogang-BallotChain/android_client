@@ -1,0 +1,125 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RLL"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="130dp"
+        android:text="BallotChain"
+        android:textColor="#FF3399FF"
+        android:textSize="35sp"
+        android:textStyle="bold" />
+
+    <RelativeLayout
+        android:layout_width="373dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView3"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="45dp"
+        android:layout_marginBottom="138dp"
+        android:background="#aaffffff"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:id="@+id/contentsLayout"
+            android:layout_width="358dp"
+            android:layout_height="173dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="4dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="4dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/emailLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="     이 메 일  "
+                    android:textColor="#ff222222"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/emailInput"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@id/emailLabel"
+                    android:inputType="textPersonName" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/pwLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" 비 밀 번 호 "
+                    android:textColor="#ff222222"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/pwInput"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@id/pwLabel"
+                    android:inputType="textPassword"
+
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text=" 비 번 확 인 "
+                    android:textColor="#ff222222"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/editText"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:inputType="textPassword" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/loginButton"
+            android:layout_width="111dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/contentsLayout"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:text="가 입 하 기" />
+    </RelativeLayout>
+
+</RelativeLayout>

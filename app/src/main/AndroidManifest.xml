@@ -39,6 +39,10 @@
         </activity>
         <activity android:name=".SplashActivity" android:theme="@android:style/Theme.NoTitleBar">
         </activity>
+        <activity android:name=".CreateAccountActivity"
+            android:label="CreateAccount"
+            >
+        </activity>
     </application>
 
 </manifest>

@@ -67,6 +67,16 @@ public class CreateAccountActivity extends AppCompatActivity {
         //           }
         //       });
 
+        // [yh] 돌아가기 버튼.
+        Button backButton = (Button) findViewById(R.id.backButton);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent resultIntent = new Intent();
+                setResult(Activity.RESULT_OK, resultIntent);
+                finish();
+            }
+        });
+
         Button saveButton = findViewById(R.id.loginButton); // 의미상 submitButton이 바르지만, dependency 문제로 보류.
         saveButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

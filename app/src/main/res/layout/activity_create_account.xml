@@ -122,4 +122,13 @@
             android:text="가 입 하 기" />
     </RelativeLayout>
 
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="83dp"
+        android:text="돌 아 가 기" />
+
 </RelativeLayout>

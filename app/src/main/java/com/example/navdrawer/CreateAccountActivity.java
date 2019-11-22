@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Date;
 
+import static android.text.TextUtils.*;
 import static com.example.navdrawer.LoginActivity.REQUEST_CODE_MENU;
 
 public class CreateAccountActivity extends AppCompatActivity {
@@ -75,21 +76,23 @@ public class CreateAccountActivity extends AppCompatActivity {
                 String pwStr2 = pwInput2.getText().toString();
 //                String birthStr = birthButton.getText().toString();
                 EmailPassWord params = new EmailPassWord(emailStr, pwStr);
-                ConnectCreateVoteModel.execute(params);
 
-                // [yh] 디버깅용 코드.
-                //Toast.makeText(getApplicationContext(), "이메일 : " + emailStr + ", 비밀번호 : " + pwStr, Toast.LENGTH_SHORT).show();
-
-                
                 // [yh] 비번, 비번확인 일치여부 검사.
-                if (!pwStr.equals(pwStr2)) {
-                    Toast.makeText(getApplicationContext(), "비밀번호와 비번확인이 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
+                if (!pwStr.equals(pwStr2) || isEmpty(emailStr) || isEmpty(pwStr) || isEmpty(pwStr2)) {
+                    Toast.makeText(getApplicationContext(), "이메일과 비밀번호와 비번확인을 정확히 입력해주세요!", Toast.LENGTH_SHORT).show();
                     Intent intent = getIntent();
                     finish();
                     //startActivity(intent);
                     startActivityForResult(intent, REQUEST_CODE_MENU);
                 }
+                else {
+                    ConnectCreateVoteModel.execute(params);
+                    Toast toast = Toast.makeText(getBaseContext(), emailStr + " 님, 회원가입 완료!", Toast.LENGTH_LONG);
+                    toast.show();
+                }
 
+                // [yh] 디버깅용 코드.
+                //Toast.makeText(getApplicationContext(), "이메일 : " + emailStr + ", 비밀번호 : " + pwStr, Toast.LENGTH_SHORT).show();
 
                 Intent resultIntent = new Intent();
                 resultIntent.putExtra("email", emailStr);

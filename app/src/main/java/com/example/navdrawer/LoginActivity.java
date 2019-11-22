@@ -93,8 +93,8 @@ public class LoginActivity extends AppCompatActivity {
 
                 // [yh] 디버깅용 코드.
                 //Toast toast = Toast.makeText(getBaseContext(), "result code : " + resultCode + ", email : " + em + ", password : " + pw, Toast.LENGTH_LONG);
-                Toast toast = Toast.makeText(getBaseContext(), em + " 님, 회원가입 완료!", Toast.LENGTH_LONG);
-                toast.show();
+                //Toast toast = Toast.makeText(getBaseContext(), em + " 님, 회원가입 완료!", Toast.LENGTH_LONG);
+                //toast.show();
             }
         }
 

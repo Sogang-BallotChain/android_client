@@ -132,6 +132,7 @@ public class  HttpConnectionToServer {
             System.out.println("we got"+result);
 
             return true;
+
         } catch (MalformedURLException e) {
             System.out.println("malformed url exception\n");
             e.printStackTrace();

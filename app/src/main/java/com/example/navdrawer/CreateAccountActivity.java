@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,9 +17,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Date;
 
+import static com.example.navdrawer.LoginActivity.REQUEST_CODE_MENU;
+
 public class CreateAccountActivity extends AppCompatActivity {
     EditText emailInput;
     EditText pwInput;
+    EditText pwInput2;
 
     //kdh
     //object email , password , passing to asynctask
@@ -53,6 +57,7 @@ public class CreateAccountActivity extends AppCompatActivity {
 
         emailInput = findViewById(R.id.emailInput);
         pwInput = findViewById(R.id.pwInput);
+        pwInput2 = findViewById(R.id.pwInput2);
 
         //       birthButton = rootView.findViewById(R.id.birthButton);
         //       birthButton.setOnClickListener(new View.OnClickListener() {
@@ -67,12 +72,24 @@ public class CreateAccountActivity extends AppCompatActivity {
                 NetworkTask ConnectCreateVoteModel = new NetworkTask();
                 String emailStr = emailInput.getText().toString();
                 String pwStr = pwInput.getText().toString();
+                String pwStr2 = pwInput2.getText().toString();
 //                String birthStr = birthButton.getText().toString();
                 EmailPassWord params = new EmailPassWord(emailStr, pwStr);
                 ConnectCreateVoteModel.execute(params);
 
                 // [yh] 디버깅용 코드.
                 //Toast.makeText(getApplicationContext(), "이메일 : " + emailStr + ", 비밀번호 : " + pwStr, Toast.LENGTH_SHORT).show();
+
+                
+                // [yh] 비번, 비번확인 일치여부 검사.
+                if (!pwStr.equals(pwStr2)) {
+                    Toast.makeText(getApplicationContext(), "비밀번호와 비번확인이 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
+                    Intent intent = getIntent();
+                    finish();
+                    //startActivity(intent);
+                    startActivityForResult(intent, REQUEST_CODE_MENU);
+                }
+
 
                 Intent resultIntent = new Intent();
                 resultIntent.putExtra("email", emailStr);

@@ -27,7 +27,7 @@
         android:layout_marginRight="88dp"
         android:layout_weight="1"
         android:ems="10"
-        android:text="투표 코드를 입력하세요"
+        android:hint="투표 코드를 입력하세요"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

@@ -16,7 +16,12 @@ import com.example.navdrawer.HttpConnectionToServer;
 import com.example.navdrawer.R;
 import com.example.navdrawer.ui.create_vote.create_vote;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONStringer;
+
+import java.util.ArrayList;
 
 public class joinVote_Fragment extends Fragment {
 
@@ -24,6 +29,10 @@ public class joinVote_Fragment extends Fragment {
 
     EditText voteId_EditText;
     Button sendId_Button;
+
+
+    //for responsed datas
+    ArrayList<String> candidates = new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -46,7 +55,7 @@ public class joinVote_Fragment extends Fragment {
                 //for test not implemented list adding ui
                 voteId_string =  voteId_EditText.getText().toString();
        //         voteId_Int = Integer.parseInt(voteId_string);
-
+                String result;
                 voteId_Int = 47;
 
                 System.out.println("voteId_Int: "+ voteId_Int);
@@ -65,12 +74,43 @@ public class joinVote_Fragment extends Fragment {
             ;
         }
 
+
+
         @Override
         protected Boolean doInBackground(Integer... params) {
             HttpConnectionToServer ConnectModel = new HttpConnectionToServer();
             String response = ConnectModel.GetVoteInfomation(params[0]);
 
-            System.out.println("response:" + response);
+            try {
+                JSONObject jsonObject = new JSONObject(response);
+                JSONObject data = jsonObject.getJSONObject("data");
+                //여기서 json parsing
+
+                //candidates = (ArrayList<String>) data.get("candidate_list");
+                JSONArray candidate_list = (JSONArray) data.get("candidate_list");
+
+                String name;
+
+                name = data.getString("name");
+                System.out.println(name);
+
+                for(int i=0;i<candidate_list.length();i++ )
+                {
+                    candidates.add( candidate_list.get(i).toString() );
+                    System.out.println(candidate_list.get(i));
+                    System.out.println(candidates.get(i));
+                }
+            /*
+                System.out.println("data "+data.getString("candidate_list"));
+                JSONObject candidate_list_json = data.optJSONObject("candidate_list");
+                System.out.println("candidate_list "+ candidate_list_json);
+            */
+
+            }
+            catch ( JSONException e){
+
+            }
+            //System.out.println("response:" + response);
             if(response != "false")
                 return true;
             else

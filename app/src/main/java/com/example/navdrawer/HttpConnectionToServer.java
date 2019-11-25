@@ -225,15 +225,29 @@ public class  HttpConnectionToServer {
             //콘텐트 요청
             //System.out.println("getContent():" + urlConnection.getContent());
 
+            /*
+            //post 방식
+            urlConnection.setDoOutput(true);
+            DataOutputStream wr = new DataOutputStream(urlConnection.getOutputStream());
+            System.out.println("clients sending :"+JO.toString() +"\n");
+            wr.write(JO.toString().getBytes("utf-8"));
+            wr.flush();
+            wr.close();
+            */
+
             //파일 읽어 온다. GET
             InputStream is = urlConnection.getInputStream();
             StringBuilder sb = new StringBuilder();
             BufferedReader br = new BufferedReader(new InputStreamReader(is,"UTF-8"));
             String result;
+
+
             while((result = br.readLine())!= null){
                 sb.append(result + "\n");
             }
             result = sb.toString();
+
+
             System.out.println("we got"+result);
 
             urlConnection.disconnect();

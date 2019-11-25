@@ -71,7 +71,7 @@ public class  HttpConnectionToServer {
             }
             result = sb.toString();
             System.out.println("we got"+result);
-
+            urlConnection.disconnect();
             return true;
         } catch (MalformedURLException e) {
             System.out.println("malformed url exception\n");
@@ -130,8 +130,9 @@ public class  HttpConnectionToServer {
             }
             result = sb.toString();
             System.out.println("we got"+result);
-
+            urlConnection.disconnect();
             return true;
+
         } catch (MalformedURLException e) {
             System.out.println("malformed url exception\n");
             e.printStackTrace();
@@ -186,7 +187,7 @@ public class  HttpConnectionToServer {
             }
             result = sb.toString();
             System.out.println("we got"+result);
-
+            urlConnection.disconnect();
             return true;
         } catch (MalformedURLException e) {
             System.out.println("malformed url exception\n");
@@ -198,5 +199,55 @@ public class  HttpConnectionToServer {
             return false;
         }
     }
+
+    public String GetVoteInfomation(Integer voteId) {
+        try {
+            urlString = "http://www.ballotchain.net/vote/";
+            urlString = urlString + Integer.toString(voteId);
+
+            URL url = new URL(urlString);
+            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+
+            //각종세팅.
+            urlConnection.setRequestProperty("Content-Type", "application/json");
+            urlConnection.setRequestProperty("User-Agent","Mozilla/4.0");
+            urlConnection.setRequestMethod("GET");
+
+
+            // 요청 방식 구하기
+            System.out.println("getRequestMethod():" + urlConnection.getRequestMethod());
+            // 응답 콘텐츠 유형 구하기
+            System.out.println("getContentType():" + urlConnection.getContentType());
+            // 응답 코드 구하기
+            System.out.println("getResponseCode():"    + urlConnection.getResponseCode());
+            // 응답 메시지 구하기
+            System.out.println("getResponseMessage():" + urlConnection.getResponseMessage());
+            //콘텐트 요청
+            //System.out.println("getContent():" + urlConnection.getContent());
+
+            //파일 읽어 온다. GET
+            InputStream is = urlConnection.getInputStream();
+            StringBuilder sb = new StringBuilder();
+            BufferedReader br = new BufferedReader(new InputStreamReader(is,"UTF-8"));
+            String result;
+            while((result = br.readLine())!= null){
+                sb.append(result + "\n");
+            }
+            result = sb.toString();
+            System.out.println("we got"+result);
+
+            urlConnection.disconnect();
+            return result;
+        } catch (MalformedURLException e) {
+            System.out.println("malformed url exception\n");
+            e.printStackTrace();
+            return "false";
+        }catch(IOException e){
+            System.out.println("IOException\n");
+            e.printStackTrace();
+            return "false";
+        }
+    }
+
 
 }

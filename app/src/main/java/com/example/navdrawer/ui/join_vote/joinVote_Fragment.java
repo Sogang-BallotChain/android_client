@@ -1,5 +1,6 @@
 package com.example.navdrawer.ui.join_vote;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,12 +15,11 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.navdrawer.HttpConnectionToServer;
 import com.example.navdrawer.R;
-import com.example.navdrawer.ui.create_vote.create_vote;
+import com.example.navdrawer.joinVoteActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.JSONStringer;
 
 import java.util.ArrayList;
 
@@ -32,7 +32,8 @@ public class joinVote_Fragment extends Fragment {
 
 
     //for responsed datas
-    ArrayList<String> candidates = new ArrayList<>();
+
+    final int REQUEST_TEST = 1;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -59,28 +60,51 @@ public class joinVote_Fragment extends Fragment {
                 voteId_Int = 47;
 
                 System.out.println("voteId_Int: "+ voteId_Int);
-
+                //새로 만든 네트워크 스레드에서 get요청과 제이슨 파싱을 실행시킨다.
                 ConnectCreateVoteModel.execute(voteId_Int);
+
+
             }
 
+
         });
+
+
+
 
         return root;
     }
 
+
+
+
+
     //thread for http connection, real http conntection is executed on 'HttpConnectionToServer' class
-    public class NetworkTask extends AsyncTask<Integer,Void,Boolean> {
+    public class NetworkTask extends AsyncTask<Integer,Void,ArrayList<String>> {
         public NetworkTask(){
             ;
         }
 
+        String name;
 
 
         @Override
-        protected Boolean doInBackground(Integer... params) {
+        protected void onPostExecute(ArrayList<String>candidates){
+            super.onPostExecute(candidates);
+
+
+            Intent intent = new Intent(getActivity() , joinVoteActivity.class);
+            intent.putExtra("candidates",candidates);
+            intent.putExtra("title",name);
+            startActivityForResult(intent,REQUEST_TEST);
+
+        }
+
+        @Override
+        protected ArrayList<String> doInBackground(Integer... params) {
             HttpConnectionToServer ConnectModel = new HttpConnectionToServer();
             String response = ConnectModel.GetVoteInfomation(params[0]);
-
+            ArrayList<String> candidates = new ArrayList<>();
             try {
                 JSONObject jsonObject = new JSONObject(response);
                 JSONObject data = jsonObject.getJSONObject("data");
@@ -89,9 +113,9 @@ public class joinVote_Fragment extends Fragment {
                 //candidates = (ArrayList<String>) data.get("candidate_list");
                 JSONArray candidate_list = (JSONArray) data.get("candidate_list");
 
-                String name;
 
                 name = data.getString("name");
+
                 System.out.println(name);
 
                 for(int i=0;i<candidate_list.length();i++ )
@@ -108,14 +132,13 @@ public class joinVote_Fragment extends Fragment {
 
             }
             catch ( JSONException e){
-
+                    ;
             }
-            //System.out.println("response:" + response);
-            if(response != "false")
-                return true;
-            else
-                return true;
-        }
+
+            return candidates;
+        }//doing in background
+
+
     }
 
 }

@@ -19,7 +19,7 @@
 
 
     <EditText
-        android:id="@+id/vote_title"
+        android:id="@+id/vote_Id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="292dp"
@@ -27,12 +27,12 @@
         android:layout_marginRight="88dp"
         android:layout_weight="1"
         android:ems="10"
-        android:text="투표 코드를 입력하세요"
+        android:hint="투표 코드를 입력하세요"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/create_vote_button"
+        android:id="@+id/get_voteId_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="544dp"

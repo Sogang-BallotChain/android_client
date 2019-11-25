@@ -1,4 +1,4 @@
-package com.example.navdrawer.ui.home;
+package com.example.navdrawer.ui.create_account;
 
 import android.content.ContentValues;
 import android.os.AsyncTask;
@@ -20,7 +20,7 @@ import java.util.Date;
 //kdh
 
 
-public class HomeFragment extends Fragment {
+public class createAccount_Fragment extends Fragment {
     EditText emailInput;
     EditText pwInput;
 
@@ -43,7 +43,7 @@ public class HomeFragment extends Fragment {
 
     Date selectedDate;
 
-    public HomeFragment() {
+    public createAccount_Fragment() {
 
     }
 

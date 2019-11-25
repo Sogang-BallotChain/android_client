@@ -10,7 +10,7 @@
         android:id="@+id/action_add"
         android:enabled="true"
         android:icon="@drawable/ic_menu_gallery"
-        android:title="회원가입"/>
+        android:title="투표 참여"/>
 
     <item
         android:id="@+id/action_setting"

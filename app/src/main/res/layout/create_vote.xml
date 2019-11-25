@@ -44,7 +44,7 @@
         android:layout_width="300dp"
         android:layout_height="0dp"
         android:layout_marginTop="40dp"
-        android:alpha="0.8"
+        android:alpha="1.0"
         android:background="@color/colorbutton"
         android:hint="후보자 이메일 목록 등록하기"
         android:textStyle="bold"

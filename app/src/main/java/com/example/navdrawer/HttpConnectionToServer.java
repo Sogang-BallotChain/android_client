@@ -72,6 +72,10 @@ public class  HttpConnectionToServer {
             result = sb.toString();
             System.out.println("we got"+result);
             urlConnection.disconnect();
+            // [yh] 중복 유저시 예외처리.
+            if (result.equals("{\"success\": 0, \"message\": \"Duplicate user\"}\n")) {
+                return false;
+            }
             return true;
         } catch (MalformedURLException e) {
             System.out.println("malformed url exception\n");

@@ -88,8 +88,10 @@ public class LoginActivity extends AppCompatActivity {
         // [yh] 회원가입 액티비티에서 돌아왔을 때의 경우.
         if (requestCode == REQUEST_CODE_MENU_2) {
             if (intent != null) {
-                String em = intent.getStringExtra("email");
+              //  String em = intent.getStringExtra("email");
                 //String pw = intent.getStringExtra("password");
+
+                Toast toast = Toast.makeText(getBaseContext(), "회원가입이 완료됐습니다!", Toast.LENGTH_LONG);
 
                 // [yh] 디버깅용 코드.
                 //Toast toast = Toast.makeText(getBaseContext(), "result code : " + resultCode + ", email : " + em + ", password : " + pw, Toast.LENGTH_LONG);

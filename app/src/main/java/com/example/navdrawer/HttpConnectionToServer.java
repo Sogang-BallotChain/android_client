@@ -135,6 +135,10 @@ public class  HttpConnectionToServer {
             result = sb.toString();
             System.out.println("we got"+result);
             urlConnection.disconnect();
+            // [yh] 백엔드에서 로그인이 처리가 안될 시 예외처리.
+            if (!result.equals("{\"success\": 1}\n")) {
+                return false;
+            }
             return true;
 
         } catch (MalformedURLException e) {

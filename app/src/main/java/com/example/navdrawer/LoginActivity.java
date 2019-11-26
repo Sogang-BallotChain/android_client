@@ -57,7 +57,7 @@ public class LoginActivity extends AppCompatActivity {
                 EmailPassWord params =  new EmailPassWord(emailStr,pwStr);
                 ConnectCreateVoteModel.execute(params);
 
-                startActivityForResult(intent, REQUEST_CODE_MENU);
+         //       startActivityForResult(intent, REQUEST_CODE_MENU);
             }
         });
 
@@ -121,8 +121,6 @@ public class LoginActivity extends AppCompatActivity {
             String email = params[0].Email;
             String pass = params[0].PassWord;
 
-
-
             if(ConnectLoginModel.LogIn(email,pass)) {
                 System.out.println("server connected true\n");
                 //Toast.makeText(getActivity(), "connected", Toast.LENGTH_SHORT).show();
@@ -135,6 +133,29 @@ public class LoginActivity extends AppCompatActivity {
             }
 
         }
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            super.onPostExecute(result);
+            System.out.println("on Post Execute !!\n");
+
+            // [yh] 로그인 오류인 경우 후속처리.
+            if (!result) {
+                //Toast toast = Toast.makeText(getBaseContext(), "이미 가입하셨습니다!", Toast.LENGTH_LONG);
+                Toast.makeText(getApplicationContext(), "잘못 입력하셨습니다!", Toast.LENGTH_SHORT).show();
+                Intent intent = getIntent();
+                finish();
+            //    startActivity(intent);
+                //startActivityForResult(intent, REQUEST_CODE_MENU);
+            }
+            // [yh] 다른 예외가 없는 경우 메인 액티비티 시작.
+            else if (result) {
+                Toast.makeText(getApplicationContext(), "로그인되었습니다 :)", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivityForResult(intent, REQUEST_CODE_MENU);
+            }
+        }
+
     }// network task
 
 }

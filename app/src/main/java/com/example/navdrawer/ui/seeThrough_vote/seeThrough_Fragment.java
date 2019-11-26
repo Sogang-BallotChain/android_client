@@ -1,4 +1,4 @@
-package com.example.navdrawer.ui.votes_ended;
+package com.example.navdrawer.ui.seeThrough_vote;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,14 +14,14 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.navdrawer.R;
 
-public class ToolsFragment extends Fragment {
+public class seeThrough_Fragment extends Fragment {
 
-    private ToolsViewModel toolsViewModel;
+    private seeThrough_ViewModel toolsViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         toolsViewModel =
-                ViewModelProviders.of(this).get(ToolsViewModel.class);
+                ViewModelProviders.of(this).get(seeThrough_ViewModel.class);
         View root = inflater.inflate(R.layout.fragment_tools, container, false);
         final TextView textView = root.findViewById(R.id.text_tools);
         toolsViewModel.getText().observe(this, new Observer<String>() {

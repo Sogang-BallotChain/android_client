@@ -3,13 +3,13 @@
     <item
         android:id="@+id/action_today"
         android:enabled="true"
-        android:icon="@drawable/ic_menu_camera"
+        android:icon="@drawable/ic_menu_share"
         android:title="투표 생성"/>
 
     <item
         android:id="@+id/action_add"
         android:enabled="true"
-        android:icon="@drawable/ic_menu_gallery"
+        android:icon="@drawable/ic_menu_send"
         android:title="투표 참여"/>
 
     <item

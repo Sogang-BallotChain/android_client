@@ -90,10 +90,10 @@ public class CreateAccountActivity extends AppCompatActivity {
                 // [yh] 비번, 비번확인 일치여부 검사.
                 if (!pwStr.equals(pwStr2) || isEmpty(emailStr) || isEmpty(pwStr) || isEmpty(pwStr2)) {
                     Toast.makeText(getApplicationContext(), "이메일과 비밀번호와 비번확인을 정확히 입력해주세요!", Toast.LENGTH_SHORT).show();
-                    Intent intent = getIntent();
-                    finish();
+                //    Intent intent = getIntent();
+                //    finish();
                     //startActivity(intent);
-                    startActivityForResult(intent, REQUEST_CODE_MENU);
+                //    startActivityForResult(intent, REQUEST_CODE_MENU);
                 }
                 else {
                     ConnectCreateVoteModel.execute(params);
@@ -164,10 +164,10 @@ public class CreateAccountActivity extends AppCompatActivity {
             if (!result) {
                 //Toast toast = Toast.makeText(getBaseContext(), "이미 가입하셨습니다!", Toast.LENGTH_LONG);
                 Toast.makeText(getApplicationContext(), "이미 가입된 이메일입니다!", Toast.LENGTH_SHORT).show();
-                Intent intent = getIntent();
-                finish();
+        //        Intent intent = getIntent();
+        //        finish();
                 //startActivity(intent);
-                startActivityForResult(intent, REQUEST_CODE_MENU);
+        //        startActivityForResult(intent, REQUEST_CODE_MENU);
             }
             // [yh] 다른 예외가 없는 경우 액티비티 종료.
             else if (result) {

@@ -54,10 +54,9 @@ public class SeeVoteActivity extends AppCompatActivity {
         ConnectSeeVoteModel.execute(voteCode);
 
 
-        adapter.addItem(new Candidate("흠숭해", "1"));
-        adapter.addItem(new Candidate("찬미해", "2"));
-        adapter.addItem(new Candidate("찬양해", "3"));
-    //System.out.println("^^^^^^^^^^^^^^");
+
+        //adapter.addItem(new Candidate("찬미해", "2"));
+        //System.out.println("^^^^^^^^^^^^^^");
 
     }//onCreate.
 

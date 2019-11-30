@@ -210,10 +210,11 @@ public class  HttpConnectionToServer {
         }
     }
 
+    // 투표 결과 조회 api과 연결.
     public String GetVoteInfomation(Integer voteId) {
         try {
             urlString = "http://www.ballotchain.net/vote/";
-            urlString = urlString + Integer.toString(voteId);
+            urlString = urlString + Integer.toString(voteId);   // URL 뒤에 투표코드를 concat.
 
             URL url = new URL(urlString);
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();

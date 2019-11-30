@@ -103,7 +103,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     //thread for http connection, real http conntection is executed on 'HttpConnectionToServer' class
-    public class NetworkTask extends AsyncTask<EmailPassWord,Void,Boolean> {
+    public class NetworkTask extends AsyncTask<EmailPassWord,Void,String> {
         private String url;
         private ContentValues values;
 
@@ -112,7 +112,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         @Override
-        protected Boolean doInBackground(EmailPassWord... params) {
+        protected String doInBackground(EmailPassWord... params) {
             HttpConnectionToServer ConnectLoginModel = new HttpConnectionToServer();
             /*
             String email = "pineleaf1216@gmail.com";
@@ -124,23 +124,23 @@ public class LoginActivity extends AppCompatActivity {
             if(ConnectLoginModel.LogIn(email,pass)) {
                 System.out.println("server connected true\n");
                 //Toast.makeText(getActivity(), "connected", Toast.LENGTH_SHORT).show();
-                return true;
+                return email;
             }
             else{
                 System.out.println("server connected false\n");
                 //Toast.makeText(getActivity(), "connect failure", Toast.LENGTH_SHORT).show();
-                return false;
+                return "";
             }
 
         }
 
         @Override
-        protected void onPostExecute(Boolean result) {
-            super.onPostExecute(result);
+        protected void onPostExecute(String email) {
+            super.onPostExecute(email);
             System.out.println("on Post Execute !!\n");
 
             // [yh] 로그인 오류인 경우 후속처리 -> [dh] 해결!
-            if (!result) {
+            if (email.equals("")) {
                 //Toast toast = Toast.makeText(getBaseContext(), "이미 가입하셨습니다!", Toast.LENGTH_LONG);
                 Toast.makeText(getApplicationContext(), "잘못 입력하셨습니다!", Toast.LENGTH_SHORT).show();
   //              Intent intent = getIntent();
@@ -149,9 +149,10 @@ public class LoginActivity extends AppCompatActivity {
                 //startActivityForResult(intent, REQUEST_CODE_MENU);
             }
             // [yh] 다른 예외가 없는 경우 메인 액티비티 시작.
-            else if (result) {
+            else {
                 Toast.makeText(getApplicationContext(), "로그인되었습니다 :)", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                intent.putExtra("email", email);    // [yh] Main activity에서 email 정보를 받도록 넘겨줌.
                 startActivityForResult(intent, REQUEST_CODE_MENU);
             }
         }

@@ -55,12 +55,12 @@ public class joinVote_Fragment extends Fragment {
             public void onClick(View v) {
                 //for test not implemented list adding ui
                 voteId_string =  voteId_EditText.getText().toString();
-       //         voteId_Int = Integer.parseInt(voteId_string);
-                String result;
-                voteId_Int = 47;
+                voteId_Int = Integer.parseInt(voteId_string);   // [yh] 투표코드 assign.
+        //        String result;
+        //        voteId_Int = 47;
 
                 System.out.println("voteId_Int: "+ voteId_Int);
-                //새로 만든 네트워크 스레드에서 get요청과 제이슨 파싱을 실행시킨다.
+                // [dh] 새로 만든 네트워크 스레드에서 get요청과 제이슨 파싱을 실행시킨다.
                 ConnectCreateVoteModel.execute(voteId_Int);
 
 
@@ -75,53 +75,33 @@ public class joinVote_Fragment extends Fragment {
         return root;
     }
 
-
-
-
-
     //thread for http connection, real http conntection is executed on 'HttpConnectionToServer' class
     public class NetworkTask extends AsyncTask<Integer,Void,ArrayList<String>> {
         public NetworkTask(){
             ;
         }
 
-        String name;
-
-
-        @Override
-        protected void onPostExecute(ArrayList<String>candidates){
-            super.onPostExecute(candidates);
-
-
-            Intent intent = new Intent(getActivity() , joinVoteActivity.class);
-            intent.putExtra("candidates",candidates);
-            intent.putExtra("title",name);
-            startActivityForResult(intent,REQUEST_TEST);
-
-        }
+        String name;    // 투표 이름을 저장할 변수.
 
         @Override
         protected ArrayList<String> doInBackground(Integer... params) {
             HttpConnectionToServer ConnectModel = new HttpConnectionToServer();
             String response = ConnectModel.GetVoteInfomation(params[0]);
-            ArrayList<String> candidates = new ArrayList<>();
+            ArrayList<String> candidates = new ArrayList<>();   // 후보자를 저장할 array 생성.
             try {
-                JSONObject jsonObject = new JSONObject(response);
-                JSONObject data = jsonObject.getJSONObject("data");
+                JSONObject jsonObject = new JSONObject(response);   // 최외각 JSON 객체.
+                JSONObject data = jsonObject.getJSONObject("data"); // 안쪽 data JSON 객체.
                 //여기서 json parsing
 
-                //candidates = (ArrayList<String>) data.get("candidate_list");
-                JSONArray candidate_list = (JSONArray) data.get("candidate_list");
-
-
-                name = data.getString("name");
-
+                name = data.getString("name");  // 투표이름 assign.
                 System.out.println(name);
 
+                //candidates = (ArrayList<String>) data.get("candidate_list");
+                JSONArray candidate_list = (JSONArray) data.get("candidate_list");  // JSON array에 값 받아오기.
                 for(int i=0;i<candidate_list.length();i++ )
                 {
-                    candidates.add( candidate_list.get(i).toString() );
-                    System.out.println(candidate_list.get(i));
+                    candidates.add( candidate_list.get(i).toString() ); // JSON array에 후보자 차례로 저장.
+                //    System.out.println(candidate_list.get(i));
                     System.out.println(candidates.get(i));
                 }
             /*
@@ -129,16 +109,23 @@ public class joinVote_Fragment extends Fragment {
                 JSONObject candidate_list_json = data.optJSONObject("candidate_list");
                 System.out.println("candidate_list "+ candidate_list_json);
             */
-
             }
             catch ( JSONException e){
                     ;
             }
-
             return candidates;
         }//doing in background
 
+        @Override
+        protected void onPostExecute(ArrayList<String>candidates){
+            super.onPostExecute(candidates);
 
-    }
+            Intent intent = new Intent(getActivity() , joinVoteActivity.class);
+            intent.putExtra("candidates",candidates);
+            intent.putExtra("title",name);
+            startActivityForResult(intent,REQUEST_TEST);
+        }//on Post Execute.
+
+    }//Network task.
 
 }

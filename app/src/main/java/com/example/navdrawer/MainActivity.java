@@ -1,5 +1,6 @@
 package com.example.navdrawer;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.navdrawer.ui.create_vote.create_vote;
@@ -26,12 +27,16 @@ public class MainActivity extends AppCompatActivity {
     private joinVote_Fragment frag2;
     private seeThrough_Fragment frag3;
 
+    String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // [yh] LoginActivity로부터 정보 받기.
+        Intent intent = getIntent();
+        email = intent.getExtras().getString("email");
 
         ConstraintLayout drawer = findViewById(R.id.main_layout);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavi);
@@ -61,8 +66,6 @@ public class MainActivity extends AppCompatActivity {
         frag2=new joinVote_Fragment();
         frag3=new seeThrough_Fragment();
         setFrag(0); // 첫 프래그먼트 화면 지정
-
-
 
     }//OnCreate
 

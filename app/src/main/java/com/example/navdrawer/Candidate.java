@@ -2,9 +2,9 @@ package com.example.navdrawer;
 
 public class Candidate {
     String candiNm;
-    int candiCnt;
+    String candiCnt;
 
-    public Candidate(String candiNm, int candiCnt) {
+    public Candidate(String candiNm, String candiCnt) {
         this.candiNm = candiNm;
         this.candiCnt = candiCnt;
     }
@@ -17,11 +17,11 @@ public class Candidate {
         this.candiNm = candiNm;
     }
 
-    public int getCount() {
+    public String getCount() {
         return candiCnt;
     }
 
-    public void setCount(int candiCnt) {
+    public void setCount(String candiCnt) {
         this.candiCnt = candiCnt;
     }
 }

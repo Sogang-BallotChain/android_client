@@ -82,6 +82,7 @@ public class joinVote_Fragment extends Fragment {
             ;
         }
 
+        int voteID;         // 투표코드 저장용 변수.
         String response;    // 서버에서 받아온 raw정보의 string 버전.
         String name;    // 투표 이름을 저장할 변수.
         Boolean is_ended = false;   // 일단 false로 초기화.
@@ -94,6 +95,7 @@ public class joinVote_Fragment extends Fragment {
         protected ArrayList<String> doInBackground(Integer... params) {
             HttpConnectionToServer ConnectModel = new HttpConnectionToServer();
             response = ConnectModel.GetVoteInfomation(params[0]);
+            voteID = params[0]; // [yh] 추가.
             ArrayList<String> candidates = new ArrayList<>();   // 후보자를 저장할 array 생성.
             try {
                 JSONObject jsonObject = new JSONObject(response);   // 최외각 JSON 객체.
@@ -133,7 +135,7 @@ public class joinVote_Fragment extends Fragment {
             // [yh] 종료된 투표인 경우.
             if (is_ended) {
                 Intent intent = new Intent(getActivity(), SeeVoteActivity.class);  // [yh] 투표결과조회.
-                intent.putExtra("httpResponse", response);
+                intent.putExtra("voteCode", voteID);        // [yh] 투표 코드를 넘겨주자.
                 startActivityForResult(intent, REQUEST_TEST);
             }
             // 종료되지 않은 투표인 경우.

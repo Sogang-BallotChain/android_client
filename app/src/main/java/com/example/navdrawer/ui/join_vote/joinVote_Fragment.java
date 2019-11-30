@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.navdrawer.HttpConnectionToServer;
 import com.example.navdrawer.R;
+import com.example.navdrawer.SeeVoteActivity;
 import com.example.navdrawer.joinVoteActivity;
 
 import org.json.JSONArray;
@@ -81,12 +82,18 @@ public class joinVote_Fragment extends Fragment {
             ;
         }
 
+        String response;    // 서버에서 받아온 raw정보의 string 버전.
         String name;    // 투표 이름을 저장할 변수.
-
+        Boolean is_ended = false;   // 일단 false로 초기화.
+/*
+        Date start_time = new Date();
+        Date end_time = new Date();
+        String winner;
+*/
         @Override
         protected ArrayList<String> doInBackground(Integer... params) {
             HttpConnectionToServer ConnectModel = new HttpConnectionToServer();
-            String response = ConnectModel.GetVoteInfomation(params[0]);
+            response = ConnectModel.GetVoteInfomation(params[0]);
             ArrayList<String> candidates = new ArrayList<>();   // 후보자를 저장할 array 생성.
             try {
                 JSONObject jsonObject = new JSONObject(response);   // 최외각 JSON 객체.
@@ -104,6 +111,9 @@ public class joinVote_Fragment extends Fragment {
                 //    System.out.println(candidate_list.get(i));
                     System.out.println(candidates.get(i));
                 }
+
+                is_ended = data.getBoolean("is_ended"); // 종료여부 assign.
+                System.out.println(is_ended);
             /*
                 System.out.println("data "+data.getString("candidate_list"));
                 JSONObject candidate_list_json = data.optJSONObject("candidate_list");
@@ -120,10 +130,20 @@ public class joinVote_Fragment extends Fragment {
         protected void onPostExecute(ArrayList<String>candidates){
             super.onPostExecute(candidates);
 
-            Intent intent = new Intent(getActivity() , joinVoteActivity.class);
-            intent.putExtra("candidates",candidates);
-            intent.putExtra("title",name);
-            startActivityForResult(intent,REQUEST_TEST);
+            // [yh] 종료된 투표인 경우.
+            if (is_ended) {
+                Intent intent = new Intent(getActivity(), SeeVoteActivity.class);  // [yh] 투표결과조회.
+                intent.putExtra("httpResponse", response);
+                startActivityForResult(intent, REQUEST_TEST);
+            }
+            // 종료되지 않은 투표인 경우.
+            else {
+                Intent intent = new Intent(getActivity(), joinVoteActivity.class);
+                intent.putExtra("httpResponse", response);
+                intent.putExtra("candidates", candidates);
+                intent.putExtra("title", name);
+                startActivityForResult(intent, REQUEST_TEST);
+            }
         }//on Post Execute.
 
     }//Network task.

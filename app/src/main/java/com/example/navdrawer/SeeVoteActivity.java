@@ -3,7 +3,11 @@ package com.example.navdrawer;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class SeeVoteActivity extends AppCompatActivity {
+    public static final int REQUEST_CODE_MENU = 101;
 
     int voteCode;                   // joinVote_Fragment로 받아온 투표 코드를 저장할 변수.
     String response;                // 서버에서 받아온 raw정보의 string 버전.
@@ -53,12 +58,36 @@ public class SeeVoteActivity extends AppCompatActivity {
         NetworkTask ConnectSeeVoteModel = new SeeVoteActivity.NetworkTask();
         ConnectSeeVoteModel.execute(voteCode);
 
-
+        // [yh] 버튼 누를시 승자 확인하는 dialog 띄워줌.
+        Button button = findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), WinnerActivity.class);
+                intent.putExtra("winner", winner);        // [yh] 승자정보를 넘겨주자.
+                startActivityForResult(intent, REQUEST_CODE_MENU);
+            }
+        });
 
         //adapter.addItem(new Candidate("찬미해", "2"));
         //System.out.println("^^^^^^^^^^^^^^");
 
     }//onCreate.
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // [yh] dialog 버튼 누르면 승자 토스트메세지로 출력.
+        if (requestCode == REQUEST_CODE_MENU) {
+            if (resultCode == RESULT_OK) {
+                String name = data.getStringExtra("name");
+                Toast.makeText(getApplicationContext(), "The winner is " + name + "!",
+                        Toast.LENGTH_LONG).show();
+            }
+        }
+
+    }
 
     //thread for http connection, real http conntection is executed on 'HttpConnectionToServer' class
     public class NetworkTask extends AsyncTask<Integer,Void,ArrayList<String>> {

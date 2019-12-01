@@ -16,8 +16,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 public class SeeVoteActivity extends AppCompatActivity {
     public static final int REQUEST_CODE_MENU = 101;
@@ -27,12 +29,14 @@ public class SeeVoteActivity extends AppCompatActivity {
 
     String name;                    // 투표 이름을 저장할 변수.
     ArrayList<String> candidates = new ArrayList<>();   // 후보자를 저장할 array 생성.
-    Date start_time = new Date();
-    Date end_time = new Date();
+    String startTimeStr;
+    String endTimeStr;
     Boolean is_ended = false;       // 일단 false로 초기화.
     String winner;
     ArrayList<String> results = new ArrayList<>();   // 후보자를 저장할 array 생성.
 
+    Date start_time;
+    Date end_time;
     CandidateAdapter adapter = new CandidateAdapter();  // 어댑터 생성.
     RecyclerView recyclerView;
 
@@ -115,7 +119,16 @@ public class SeeVoteActivity extends AppCompatActivity {
                     System.out.println(candidates.get(i));
                 }
 
-                // [yh] 시작시간, 종료시간 추출.  ////////////////////////////////////////
+                // [yh] 시작시간, 종료시간 추출.
+                start_time = new Date(data.getLong("start_time"));
+                SimpleDateFormat stFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.KOREA);
+                startTimeStr = stFormat.format(start_time);
+                System.out.println("start_time : " + startTimeStr);
+
+                end_time = new Date(data.getLong("end_time"));
+                SimpleDateFormat etFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.KOREA);
+                endTimeStr = etFormat.format(end_time);
+                System.out.println("end_time : " + endTimeStr);
 
                 // [yh] 종료여부 추출.
                 is_ended = data.getBoolean("is_ended"); // 종료여부 assign.

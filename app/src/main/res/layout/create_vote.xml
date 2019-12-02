@@ -10,61 +10,122 @@
         android:id="@+id/vote_title"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="40dp"
         android:layout_weight="1"
         android:bufferType="spannable"
         android:ems="10"
         android:gravity="center_horizontal"
         android:hint="투표 제목을 입력하세요"
+        android:textStyle="bold"
+        android:theme="@style/EditText.Login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:theme="@style/EditText.Login"
-        android:textStyle="bold"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/email_addr"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_width="311dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="20dp"
         android:layout_weight="1"
         android:ems="10"
-        android:hint="이메일을 입력하세요"
-        app:layout_constraintEnd_toEndOf="@+id/vote_title"
-        app:layout_constraintStart_toStartOf="@+id/vote_title"
-        app:layout_constraintTop_toBottomOf="@+id/vote_title"
         android:gravity="center_horizontal"
+        android:hint="이메일을 입력하세요"
+        android:textStyle="bold"
         android:theme="@style/EditText.Login"
-        android:textStyle="bold"
-        />
-
-    <Button
-        android:id="@+id/email_uploads"
-        android:layout_width="300dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="40dp"
-        android:alpha="1.0"
-        android:background="@color/colorbutton"
-        android:hint="후보자 이메일 목록 등록하기"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/vote_title"
-
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/vote_title"
-        app:layout_constraintTop_toBottomOf="@+id/email_addr" />
+        app:layout_constraintTop_toBottomOf="@+id/vote_title" />
 
+
+    <EditText
+        android:id="@+id/edit_candidates2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+        android:hint="후보자 입력하세요"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/email_addr">
+
+        <Button
+            android:id="@+id/AddCandidateButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="추가하기"
+            android:textSize="20dp" />
+
+        <Button
+            android:id="@+id/DeleteButtonCandidates2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="삭제하기"
+            android:textSize="20dp" />
+
+        <Button
+            android:id="@+id/RegisterButtonCandidates2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="등록하기"
+            android:textSize="20dp" />
+
+
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        tools:layout_editor_absoluteX="0dp">
+        <!--
+        <Button
+            android:id="@+id/email_uploads"
+            android:layout_width="300dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="40dp"
+            android:alpha="1.0"
+            android:background="@color/colorbutton"
+            android:hint="후보자 이메일 목록 등록하기"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/vote_title"
+
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/vote_title"
+            app:layout_constraintTop_toBottomOf="@+id/email_addr" />
+-->
+
+        <ListView
+            android:id="@+id/listview2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:choiceMode="multipleChoice" />
+    </ScrollView>
 
     <Button
         android:id="@+id/st_month"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginLeft="50dp"
         android:alpha="0.8"
         android:background="@color/colorbutton"
         android:text="달력"
         android:textStyle="bold"
-        app:layout_constraintBaseline_toBaselineOf="@+id/st_time"
-        app:layout_constraintStart_toStartOf="@+id/email_uploads" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/st_time" />
 
     <Button
         android:id="@+id/st_time"
@@ -72,7 +133,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
         android:alpha="0.8"
@@ -81,18 +142,20 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/st_set_due"
         app:layout_constraintStart_toEndOf="@+id/st_month"
-        app:layout_constraintTop_toBottomOf="@+id/email_uploads" />
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
 
     <Button
         android:id="@+id/st_set_due"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="50dp"
+        android:layout_marginRight="50dp"
         android:alpha="0.8"
         android:background="@color/colorbutton"
         android:text="달력/시간 확인"
         android:textStyle="bold"
-        app:layout_constraintBaseline_toBaselineOf="@+id/st_time"
-        app:layout_constraintEnd_toEndOf="@+id/email_uploads" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/st_time" />
 
     <Button
         android:id="@+id/dt_month"
@@ -104,22 +167,23 @@
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/dt_time"
         app:layout_constraintEnd_toEndOf="@+id/st_month"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/st_month" />
+
 
     <Button
         android:id="@+id/dt_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="10dp"
         android:alpha="0.8"
         android:background="@color/colorbutton"
         android:text="시간"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/st_time"
-        app:layout_constraintHorizontal_bias="0.583"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/st_time"
         app:layout_constraintTop_toBottomOf="@+id/st_time" />
-
 
     <Button
         android:id="@+id/dt_set_due"
@@ -131,22 +195,22 @@
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/dt_time"
         app:layout_constraintEnd_toEndOf="@+id/st_set_due"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/st_set_due" />
 
     <Button
         android:id="@+id/CreateVoteButton"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
         android:alpha="0.7"
         android:background="@color/colorAccent"
         android:text="투표 생성하기"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dt_time"
-        app:layout_constraintVertical_bias="0.207" />
+        app:layout_constraintTop_toBottomOf="@+id/dt_time" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

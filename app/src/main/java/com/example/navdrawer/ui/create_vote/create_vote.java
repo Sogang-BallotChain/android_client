@@ -3,6 +3,8 @@ package com.example.navdrawer.ui.create_vote;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Editable;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,9 +20,12 @@ import com.example.navdrawer.AddCandidates;
 //for date,time setting 1014
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.RadioGroup;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -36,6 +41,10 @@ import java.util.Date;
 //for HttpConnectionToServer 1101
 
 public class create_vote extends Fragment {
+
+    private RadioGroup radioGroup;
+
+
 
 
     JSONObject createVoteJson(String voteName, long st_unix, long dt_unix, JSONArray candidates,String email){
@@ -67,6 +76,11 @@ public class create_vote extends Fragment {
     //CreateVoteModel 클래스는 무슨 역할인거지?
     private CreateVoteModel createVoteModel;
 
+    EditText edittext;
+    Button buttonAdd;
+    ArrayList<String> items;
+    ArrayAdapter adapter;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -79,6 +93,8 @@ public class create_vote extends Fragment {
 
         //register candidates
         //push Button and move to SeeDiscriptionAndJOinVote
+        /*get rid of this part for radio updates
+
         Button intentButton = root.findViewById(R.id.email_uploads);
         intentButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,7 +106,58 @@ public class create_vote extends Fragment {
                 //startActivity(intent);
             }
         } );
+        */
 
+
+        //화면 ui들
+        edittext = (EditText)root.findViewById(R.id.edit_candidates2);
+        buttonAdd = (Button)root.findViewById(R.id.AddCandidateButton2);
+        Button buttonDelete = (Button)root.findViewById(R.id.DeleteButtonCandidates2);
+        Button buttonRegister = (Button)root.findViewById(R.id.RegisterButtonCandidates2);
+        //빈 데이터 리스트 생성.
+        items = new ArrayList<String>();
+        adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, items);
+
+        final ListView listview = (ListView) root.findViewById(R.id.listview2);
+        listview.setAdapter(adapter);
+
+        //버튼 클릭시 리스트에 추가.
+        buttonAdd.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Editable Text1 = edittext.getText();
+                items.add(Text1.toString());
+                adapter.notifyDataSetChanged();
+            }
+        });
+
+
+        buttonDelete.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+                SparseBooleanArray checkedItems = listview.getCheckedItemPositions();
+                int count = adapter.getCount() ;
+
+                for (int i = count-1; i >= 0; i--) {
+                    if (checkedItems.get(i)) {
+                        items.remove(i) ;
+                    }
+                }
+
+                // 모든 선택 상태 초기화.
+                listview.clearChoices() ;
+
+                adapter.notifyDataSetChanged();
+            }
+
+        }) ;
+
+        buttonRegister.setOnClickListener(new Button.OnClickListener(){
+
+            public void onClick(View v){
+                ;
+            }
+
+        });
 
 
         //for date,time setting 1014 ,setting starting date

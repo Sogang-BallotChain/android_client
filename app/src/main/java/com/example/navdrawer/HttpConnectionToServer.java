@@ -256,10 +256,10 @@ public class  HttpConnectionToServer {
                 sb.append(result + "\n");
             }
             result = sb.toString();
-
             System.out.println("we got"+result);
             // [yh] 해당 투표코드가 존재하지 않는 경우.
             if (result.equals("{\"success\": 0, \"message\": \"No such vote\"}\n")) {
+                System.out.println("empty!!!!!!!!");
                 return "empty";
             }
 

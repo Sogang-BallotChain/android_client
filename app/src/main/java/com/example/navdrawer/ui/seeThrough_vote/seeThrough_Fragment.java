@@ -86,6 +86,8 @@ public class seeThrough_Fragment extends Fragment {
 
             ArrayList<String> candidates = new ArrayList<>();   // 후보자를 저장할 array 생성.
             try {
+                //System.out.println(response);
+                // [yh] 투표코드가 유효할 때만 수행.
                 if (!response.equals("empty")) {
                     JSONObject jsonObject = new JSONObject(response);   // 최외각 JSON 객체.
                     JSONObject data = jsonObject.getJSONObject("data"); // 안쪽 data JSON 객체.

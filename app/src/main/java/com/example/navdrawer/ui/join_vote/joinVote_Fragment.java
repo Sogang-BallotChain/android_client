@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -15,7 +16,6 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.navdrawer.HttpConnectionToServer;
 import com.example.navdrawer.R;
-import com.example.navdrawer.SeeVoteActivity;
 import com.example.navdrawer.joinVoteActivity;
 
 import org.json.JSONArray;
@@ -132,16 +132,13 @@ public class joinVote_Fragment extends Fragment {
         protected void onPostExecute(ArrayList<String>candidates){
             super.onPostExecute(candidates);
 
-            // [yh] 종료된 투표인 경우.
+            // 종료된 투표인 경우.
             if (is_ended) {
-                Intent intent = new Intent(getActivity(), SeeVoteActivity.class);  // [yh] 투표결과조회.
-                intent.putExtra("voteCode", voteID);        // [yh] 투표 코드를 넘겨주자.
-                startActivityForResult(intent, REQUEST_TEST);
+                Toast.makeText(getContext(), "이미 종료된 투표입니다!", Toast.LENGTH_SHORT).show();
             }
             // 종료되지 않은 투표인 경우.
             else {
                 Intent intent = new Intent(getActivity(), joinVoteActivity.class);
-                intent.putExtra("httpResponse", response);
                 intent.putExtra("candidates", candidates);
                 intent.putExtra("title", name);
                 startActivityForResult(intent, REQUEST_TEST);

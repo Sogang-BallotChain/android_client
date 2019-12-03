@@ -252,14 +252,16 @@ public class  HttpConnectionToServer {
             BufferedReader br = new BufferedReader(new InputStreamReader(is,"UTF-8"));
             String result;
 
-
             while((result = br.readLine())!= null){
                 sb.append(result + "\n");
             }
             result = sb.toString();
 
-
             System.out.println("we got"+result);
+            // [yh] 해당 투표코드가 존재하지 않는 경우.
+            if (result.equals("{\"success\": 0, \"message\": \"No such vote\"}\n")) {
+                return "empty";
+            }
 
             urlConnection.disconnect();
             return result;

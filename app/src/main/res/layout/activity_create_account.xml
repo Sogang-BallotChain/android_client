@@ -119,7 +119,10 @@
             android:layout_below="@+id/contentsLayout"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
-            android:text="가 입 하 기" />
+            android:background="#FF3399FF"
+            android:text="가 입 하 기"
+            android:textColor="#ffffff"
+            android:textStyle="bold" />
     </RelativeLayout>
 
     <Button
@@ -129,6 +132,9 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="83dp"
-        android:text="돌 아 가 기" />
+        android:background="#FF3399FF"
+        android:text="돌 아 가 기"
+        android:textColor="#ffffff"
+        android:textStyle="bold" />
 
 </RelativeLayout>

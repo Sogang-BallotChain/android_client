@@ -75,7 +75,10 @@
 			android:layout_alignParentRight="true"
 			android:layout_centerVertical="true"
 			android:layout_marginRight="4dp"
-			android:text="로 그 인" />
+			android:background="#FF3399FF"
+			android:text="로 그 인"
+			android:textColor="#ffffff"
+			android:textStyle="bold" />
 	</RelativeLayout>
 
 	<TextView
@@ -98,6 +101,9 @@
 		android:layout_below="@id/RL"
 		android:layout_centerHorizontal="true"
 		android:layout_marginTop="70dp"
-		android:text="회 원 가 입" />
+		android:background="#FF3399FF"
+		android:text="회 원 가 입"
+		android:textColor="#ffffff"
+		android:textStyle="bold" />
 
 </RelativeLayout>

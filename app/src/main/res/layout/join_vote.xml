@@ -33,10 +33,12 @@
 
     <Button
         android:id="@+id/get_voteId_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="95dp"
+        android:layout_height="45dp"
         android:layout_marginTop="544dp"
-        android:text=" 투표 불러오기 "
+        android:background="#FF3399FF"
+        android:text=" 참 여 하 기 ! "
+        android:textColor="#ffffff"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.53"
         app:layout_constraintStart_toStartOf="parent"

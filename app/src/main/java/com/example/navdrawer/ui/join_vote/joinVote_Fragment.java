@@ -30,7 +30,7 @@ public class joinVote_Fragment extends Fragment {
 
     EditText voteId_EditText;
     Button sendId_Button;
-
+    Integer voteId_Int;
 
     //for responsed datas
 
@@ -48,20 +48,19 @@ public class joinVote_Fragment extends Fragment {
 
 
         sendId_Button.setOnClickListener(new View.OnClickListener(){
-            String voteId_string;
-            int voteId_Int;
 
-            NetworkTask ConnectCreateVoteModel = new joinVote_Fragment.NetworkTask();
+
+
             @Override
             public void onClick(View v) {
+                NetworkTask ConnectCreateVoteModel = new joinVote_Fragment.NetworkTask();
                 //for test not implemented list adding ui
-                voteId_string =  voteId_EditText.getText().toString();
-                voteId_Int = Integer.parseInt(voteId_string);   // [yh] 투표코드 assign.
-        //        String result;
-        //        voteId_Int = 47;
-
+                //voteId_string =  voteId_EditText.getText().toString();
+                //         voteId_Int = Integer.parseInt(voteId_string);
+                String result;
+                voteId_Int = Integer.parseInt(voteId_EditText.getText().toString());
                 System.out.println("voteId_Int: "+ voteId_Int);
-                // [dh] 새로 만든 네트워크 스레드에서 get요청과 제이슨 파싱을 실행시킨다.
+                //새로 만든 네트워크 스레드에서 get요청과 제이슨 파싱을 실행시킨다.
                 ConnectCreateVoteModel.execute(voteId_Int);
 
 
@@ -76,55 +75,55 @@ public class joinVote_Fragment extends Fragment {
         return root;
     }
 
+
+
+
+
     //thread for http connection, real http conntection is executed on 'HttpConnectionToServer' class
     public class NetworkTask extends AsyncTask<Integer,Void,ArrayList<String>> {
         public NetworkTask(){
             ;
         }
 
-        int voteID;         // 투표코드 저장용 변수.
-        String response;    // 서버에서 받아온 raw정보의 string 버전.
-        String name;    // 투표 이름을 저장할 변수.
-        Boolean is_ended = false;   // 일단 false로 초기화.
-/*
-        Date start_time = new Date();
-        Date end_time = new Date();
-        String winner;
-*/
+        String name;
+
+
+
         @Override
         protected ArrayList<String> doInBackground(Integer... params) {
             HttpConnectionToServer ConnectModel = new HttpConnectionToServer();
-            response = ConnectModel.GetVoteInfomation(params[0]);
-            voteID = params[0]; // [yh] 추가.
-            ArrayList<String> candidates = new ArrayList<>();   // 후보자를 저장할 array 생성.
+            String response = ConnectModel.GetVoteInfomation(params[0]);
+            ArrayList<String> candidates = new ArrayList<>();
             try {
-                JSONObject jsonObject = new JSONObject(response);   // 최외각 JSON 객체.
-                JSONObject data = jsonObject.getJSONObject("data"); // 안쪽 data JSON 객체.
+                JSONObject jsonObject = new JSONObject(response);
+                JSONObject data = jsonObject.getJSONObject("data");
                 //여기서 json parsing
 
-                name = data.getString("name");  // 투표이름 assign.
-                System.out.println(name);
-
                 //candidates = (ArrayList<String>) data.get("candidate_list");
-                JSONArray candidate_list = (JSONArray) data.get("candidate_list");  // JSON array에 값 받아오기.
+                JSONArray candidate_list = (JSONArray) data.get("candidate_list");
+
+
+                name = data.getString("name");
+
+                System.out.println("names: "+name);
+
                 for(int i=0;i<candidate_list.length();i++ )
                 {
-                    candidates.add( candidate_list.get(i).toString() ); // JSON array에 후보자 차례로 저장.
-                //    System.out.println(candidate_list.get(i));
+                    candidates.add( candidate_list.get(i).toString() );
+                    System.out.println(candidate_list.get(i));
                     System.out.println(candidates.get(i));
                 }
-
-                is_ended = data.getBoolean("is_ended"); // 종료여부 assign.
-                System.out.println(is_ended);
             /*
                 System.out.println("data "+data.getString("candidate_list"));
                 JSONObject candidate_list_json = data.optJSONObject("candidate_list");
                 System.out.println("candidate_list "+ candidate_list_json);
             */
+
             }
             catch ( JSONException e){
-                    ;
+                ;
             }
+
             return candidates;
         }//doing in background
 
@@ -132,19 +131,17 @@ public class joinVote_Fragment extends Fragment {
         protected void onPostExecute(ArrayList<String>candidates){
             super.onPostExecute(candidates);
 
-            // 종료된 투표인 경우.
-            if (is_ended) {
-                Toast.makeText(getContext(), "이미 종료된 투표입니다!", Toast.LENGTH_SHORT).show();
-            }
-            // 종료되지 않은 투표인 경우.
-            else {
-                Intent intent = new Intent(getActivity(), joinVoteActivity.class);
-                intent.putExtra("candidates", candidates);
-                intent.putExtra("title", name);
-                startActivityForResult(intent, REQUEST_TEST);
-            }
-        }//on Post Execute.
 
-    }//Network task.
+            Intent intent = new Intent(getActivity() , joinVoteActivity.class);
+            intent.putExtra("candidates",candidates);
+            intent.putExtra("title",name);
+
+            System.out.println("before intent voteId_Int: "+ voteId_Int);
+            
+            startActivityForResult(intent,REQUEST_TEST);
+
+        }
+
+    }
 
 }

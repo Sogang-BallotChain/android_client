@@ -163,7 +163,7 @@ public class CreateAccountActivity extends AppCompatActivity {
             // [yh] 중복된 이메일인 경우 후속처리.
             if (!result) {
                 //Toast toast = Toast.makeText(getBaseContext(), "이미 가입하셨습니다!", Toast.LENGTH_LONG);
-                Toast.makeText(getApplicationContext(), "이미 가입된 이메일입니다!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "신규가입 서강이메일을 바르게 입력하세요!", Toast.LENGTH_SHORT).show();
         //        Intent intent = getIntent();
         //        finish();
                 //startActivity(intent);

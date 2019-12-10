@@ -72,8 +72,9 @@ public class  HttpConnectionToServer {
             result = sb.toString();
             System.out.println("we got"+result);
             urlConnection.disconnect();
-            // [yh] 중복 유저시 예외처리.
-            if (result.equals("{\"success\": 0, \"message\": \"Duplicate user\"}\n")) {
+            // [yh] 중복 유저 시 예외처리, 서강이메일 유저 아닐 시 예외처리.
+            //if (result.equals("{\"success\": 0, \"message\": \"Duplicate user\"}\n")) {
+            if (!result.equals("{\"success\": 1}\n")) {
                 return false;
             }
             return true;

@@ -21,10 +21,10 @@ public class LoginActivity extends AppCompatActivity {
 
     EditText emailInput;
     EditText pwInput;
-
-    private static class EmailPassWord{
-        String Email;
-        String PassWord;
+    //dh public으로 바꿀게요~
+    public static class EmailPassWord{
+        public static String Email;
+        public static String PassWord;
 
         EmailPassWord(String Email,String PassWord){
             this.Email = Email;
@@ -57,7 +57,7 @@ public class LoginActivity extends AppCompatActivity {
                 EmailPassWord params =  new EmailPassWord(emailStr,pwStr);
                 ConnectCreateVoteModel.execute(params);
 
-         //       startActivityForResult(intent, REQUEST_CODE_MENU);
+                //       startActivityForResult(intent, REQUEST_CODE_MENU);
             }
         });
 
@@ -78,17 +78,19 @@ public class LoginActivity extends AppCompatActivity {
 
         if (requestCode == REQUEST_CODE_MENU) {
             if (intent != null) {
+            /*  [yh] 디버깅용 코드.
                 String menu = intent.getStringExtra("menu");
                 String message = intent.getStringExtra("message");
 
                 Toast toast = makeText(getBaseContext(), "result code : " + resultCode + ", menu : " + menu + ", message : " + message, Toast.LENGTH_LONG);
                 toast.show();
+             */
             }
         }
         // [yh] 회원가입 액티비티에서 돌아왔을 때의 경우.
         if (requestCode == REQUEST_CODE_MENU_2) {
             if (intent != null) {
-              //  String em = intent.getStringExtra("email");
+                //  String em = intent.getStringExtra("email");
                 //String pw = intent.getStringExtra("password");
 
                 Toast toast = Toast.makeText(getBaseContext(), "회원가입이 완료됐습니다!", Toast.LENGTH_LONG);
@@ -143,14 +145,14 @@ public class LoginActivity extends AppCompatActivity {
             if (email.equals("")) {
                 //Toast toast = Toast.makeText(getBaseContext(), "이미 가입하셨습니다!", Toast.LENGTH_LONG);
                 Toast.makeText(getApplicationContext(), "잘못 입력하셨습니다!", Toast.LENGTH_SHORT).show();
-  //              Intent intent = getIntent();
-  //              finish();
-  //              startActivity(intent);
+                //              Intent intent = getIntent();
+                //              finish();
+                //              startActivity(intent);
                 //startActivityForResult(intent, REQUEST_CODE_MENU);
             }
             // [yh] 다른 예외가 없는 경우 메인 액티비티 시작.
             else {
-                Toast.makeText(getApplicationContext(), "로그인되었습니다 :)", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "로그인되었습니다!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 intent.putExtra("email", email);    // [yh] Main activity에서 email 정보를 받도록 넘겨줌.
                 startActivityForResult(intent, REQUEST_CODE_MENU);

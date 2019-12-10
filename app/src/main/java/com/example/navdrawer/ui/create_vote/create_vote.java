@@ -116,7 +116,7 @@ public class create_vote extends Fragment {
         Button buttonRegister = (Button)root.findViewById(R.id.RegisterButtonCandidates2);
         //빈 데이터 리스트 생성.
         items = new ArrayList<String>();
-        adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, items);
+        adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_multiple_choice, items);
 
         final ListView listview = (ListView) root.findViewById(R.id.listview2);
         listview.setAdapter(adapter);
@@ -126,8 +126,11 @@ public class create_vote extends Fragment {
             @Override
             public void onClick(View v) {
                 Editable Text1 = edittext.getText();
-                items.add(Text1.toString());
-                adapter.notifyDataSetChanged();
+                if(Text1.toString() != "") {
+                    items.add(Text1.toString());
+                    adapter.notifyDataSetChanged();
+                    edittext.setText("");
+                }
             }
         });
 
@@ -154,7 +157,11 @@ public class create_vote extends Fragment {
         buttonRegister.setOnClickListener(new Button.OnClickListener(){
 
             public void onClick(View v){
-                ;
+                for(int i=0;i<items.size();i++) {
+                    System.out.println("#"+i+items.get(i));
+                    //    JSONArray candidate_list = new JSONArray();
+                    candidate_list.put(items.get(i));
+                }
             }
 
         });
@@ -235,7 +242,7 @@ public class create_vote extends Fragment {
         return root;
     }//onCreate
 
-
+/*
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -250,7 +257,7 @@ public class create_vote extends Fragment {
             }
         }
     }
-
+*/
     //methods for setting starting date,time
     void st_showDate(){
         DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {

@@ -203,7 +203,7 @@
     <ListView
         android:id="@+id/listview2"
         android:layout_width="match_parent"
-        android:layout_height="140dp"
+        android:layout_height="135dp"
         android:layout_weight="1"
         android:choiceMode="multipleChoice"
         app:layout_constraintBottom_toTopOf="@+id/st_time"
@@ -219,7 +219,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginStart="30dp"
         android:layout_marginLeft="60dp"
-        android:layout_marginTop="460dp"
+        android:layout_marginTop="458dp"
         android:text="4. 시작시간, 종료시간"
         android:textColor="#FF3399FF"
         android:textSize="15sp"

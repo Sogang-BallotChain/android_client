@@ -8,45 +8,116 @@
     >
 
 
+    <TextView
+        android:id="@+id/textView50"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="BallotChain"
+        android:textColor="#FF3399FF"
+        android:textSize="35sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/textView51"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="75dp"
+        android:text="1. 투표 제목"
+        android:textColor="#FF3399FF"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/text_slideshow"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <EditText
         android:id="@+id/vote_title"
-        android:layout_width="300dp"
+        android:layout_width="350dp"
         android:layout_height="45dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="90dp"
         android:layout_weight="1"
         android:bufferType="spannable"
         android:ems="10"
         android:gravity="center_horizontal"
         android:hint="투표 제목을 입력하세요"
-        android:textStyle="bold"
         android:theme="@style/EditText.Login"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.54"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView52"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="145dp"
+        android:text="2. 이메일 입력"
+        android:textColor="#FF3399FF"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/text_slideshow"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/email_addr"
-        android:layout_width="300dp"
+        android:layout_width="350dp"
         android:layout_height="45dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="23dp"
         android:layout_weight="1"
         android:ems="10"
         android:gravity="center_horizontal"
         android:hint="이메일을 입력하세요"
-        android:textStyle="bold"
         android:theme="@style/EditText.Login"
         app:layout_constraintEnd_toEndOf="@+id/vote_title"
         app:layout_constraintStart_toStartOf="@+id/vote_title"
         app:layout_constraintTop_toBottomOf="@+id/vote_title" />
 
+    <TextView
+        android:id="@+id/textView53"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="258dp"
+        android:text="3. 후보자 입력"
+        android:textColor="#FF3399FF"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/text_slideshow"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/edit_candidates2"
-        android:layout_width="300dp"
+        android:layout_width="350dp"
         android:layout_height="45dp"
-        android:layout_marginTop="10dp"
-        android:hint="후보자 입력하세요"
+        android:layout_marginTop="28dp"
+        android:gravity="center_horizontal"
+        android:hint="후보자들을 입력하세요"
         app:layout_constraintEnd_toEndOf="@+id/email_addr"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/email_addr"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
@@ -114,7 +185,7 @@
     <ListView
         android:id="@+id/listview2"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="150dp"
         android:layout_weight="1"
         android:choiceMode="multipleChoice"
         app:layout_constraintBottom_toTopOf="@+id/st_time"
@@ -141,7 +212,7 @@
         android:layout_height="40dp"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="220dp"
+        android:layout_marginTop="170dp"
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"

@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
         frag1=new create_vote();
         frag2=new joinVote_Fragment();
         frag3=new seeThrough_Fragment();
-        setFrag(0); // 첫 프래그먼트 화면 지정
+        setFrag(1); // 첫 프래그먼트 화면 지정
 
     }//OnCreate
 
